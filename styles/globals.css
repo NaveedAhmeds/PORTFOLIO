@@ -12,13 +12,11 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
-
-	/* background-image: url("/Hercules.webp"); Make sure it's in public/ */
+	background-image: url("/Hercules.webp");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
-
 	color: var(--foreground);
 	font-family: "Cinzel", serif;
 	-webkit-font-smoothing: antialiased;
@@ -36,13 +34,13 @@ a {
 	text-decoration: none;
 }
 
-.bg-glass {
+/* .bg-glass {
 	background-color: rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(5px);
 	border-radius: 12px;
 	padding: 2rem;
 	margin-bottom: 2rem;
-}
+} */
 
 html,
 body,
@@ -53,15 +51,6 @@ body,
 	overflow-x: hidden;
 }
 
-body {
-	/* background-image: url("/Hercules.webp"); */
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	font-family: "Neue Montreal", sans-serif;
-}
-
 body::before {
 	content: "";
 	position: fixed;
@@ -69,7 +58,7 @@ body::before {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-image: url("/Hercules.webp");
+	/* background-image: url("/Hercules.webp"); */
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -80,7 +69,7 @@ body::before {
 	will-change: transform;
 }
 
-body.scrolled::before {
+body.scrolled::after {
 	transform: scale(1.05); /* Subtle zoom/parallax on scroll */
 }
 
