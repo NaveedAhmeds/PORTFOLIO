@@ -1,0 +1,160 @@
+.navbar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 12%;
+	/* making it not blur for now */
+	backdrop-filter: blur(2px);
+	background-color: transparent;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	z-index: 1000;
+	border-bottom: 1px solid rgba(245, 238, 230, 0.5);
+	transition: (
+		background-color 0.3s ease,
+		backdrop-filter 3px 0.3s ease,
+		border-bottom 0.3s ease
+	);
+	font-family: "Neue Montreal", sans-serif;
+}
+
+.scrolled {
+	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(12px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.logoContainer {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.logo {
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: white;
+	letter-spacing: 0.1em;
+	user-select: none;
+	text-transform: uppercase;
+}
+
+.subtitle {
+	font-size: 0.9rem;
+	font-weight: 550;
+	color: rgba(255, 255, 255, 0.7);
+	font-style: normal;
+	user-select: none;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+/* Nav links */
+
+.navLinks {
+	list-style: none;
+	display: flex;
+	gap: 1.2rem;
+}
+
+.navLinks a {
+	color: white;
+	text-decoration: none;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	transition: color 0.3s ease, border-bottom 0.3s ease;
+	padding-bottom: 3px;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid transparent;
+	text-decoration: line-through 2px transparent;
+}
+
+.navLinks a:hover,
+.navLinks a.active {
+	transition: ease-in 0.1s;
+	font-weight: 600;
+	color: white;
+	border-bottom: 3px solid white;
+}
+
+/* Hamburger */
+
+.hamburger {
+	display: none;
+	flex-direction: column;
+	cursor: pointer;
+	gap: 4px;
+	z-index: 1100;
+}
+
+.hamburger span {
+	width: 22px;
+	height: 3px;
+	background: white;
+	border-radius: 3px;
+	transition: background 0.3s ease;
+}
+
+/* Mobile menu overlay */
+
+.mobileMenu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 70%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.787);
+	backdrop-filter: blur(15px);
+	padding: 3rem 2rem;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+	z-index: 1050;
+	font-family: "Neue Montreal", sans-serif;
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	user-select: none;
+	transform: translateX(0);
+	transition: transform 0.3s ease;
+}
+
+.mobileMenu li a {
+	color: #ffd700;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.mobileMenu li a:hover {
+	color: white;
+}
+
+/* Scroll progress bar */
+
+.progressBar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 3px;
+	width: 100%;
+	background: white;
+	transform-origin: left;
+	transform: scaleX(0);
+	transition: transform 0.1s linear;
+	z-index: 1100;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+	.navLinks {
+		display: none;
+	}
+	.hamburger {
+		display: flex;
+	}
+}
