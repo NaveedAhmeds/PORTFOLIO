@@ -11,6 +11,7 @@ export default function Home() {
 		<>
 			<Navbar />
 			<main className={styles.main}>
+				{/* Reorientation required */}
 				<Hero />
 				<ExperienceSection />
 				<Projects />
