@@ -4,7 +4,6 @@ import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Experience from "../components/Experience";
-import ExperienceSection from "@/components/ExperienceSection";
 
 export default function Home() {
 	return (
@@ -13,9 +12,8 @@ export default function Home() {
 			<main className={styles.main}>
 				{/* Reorientation required */}
 				<Hero />
-				<ExperienceSection />
-				<Projects />
 				<Experience />
+				<Projects />
 				<Contact />
 			</main>
 		</>
