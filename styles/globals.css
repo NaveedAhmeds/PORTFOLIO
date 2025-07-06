@@ -41,14 +41,14 @@ body::before {
 	/* background-attachment: fixed; Removed to enable scroll movement */
 	z-index: -1;
 	transform: translateY(var(--bg-translateY, 0)) scale(1);
-	transition: transform 0.3s ease;
+	transition: transform 0.1s ease;
 	will-change: transform;
 	cursor: none !important;
 }
 
 /* Zoom + Scroll vertical shift on scroll */
 body.scrolled::before {
-	transform: translateY(var(--bg-translateY, 0)) scale(1.1);
+	transform: translateY(var(--bg-translateY, 0)) scale(1.02);
 }
 
 /* Universal box sizing and reset */
