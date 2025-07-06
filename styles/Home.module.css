@@ -50,3 +50,13 @@
 	padding: 2rem;
 	margin-bottom: 2rem;
 } */
+
+.body {
+	background-image: url("/Hercules.webp");
+	background-size: cover; /* cover entire viewport */
+	background-position: center; /* center the image */
+	background-repeat: no-repeat; /* no annoying repeats */
+	background-attachment: fixed; /* nice parallax effect (optional) */
+	/* You can add a background color as fallback */
+	background-color: #111;
+}

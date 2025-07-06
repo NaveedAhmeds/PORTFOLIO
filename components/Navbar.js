@@ -20,68 +20,90 @@ export default function Navbar() {
 				document.documentElement.scrollHeight - window.innerHeight;
 			const progress = Math.min(scrollTop / docHeight, 1);
 
-			setScrolled(scrollTop > 30);
+			setScrolled(scrollTop > 10);
 			setScrollProgress(progress);
+
+			if (scrollTop > 10) {
+				document.body.classList.add("scrolled");
+			} else {
+				document.body.classList.remove("scrolled");
+			}
 		};
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
+	const scrollToTop = (e) => {
+		e.preventDefault();
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
 	return (
-		<motion.nav
-			className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
-			initial={{ y: -80, opacity: 0 }}
-			animate={{ y: 0, opacity: 1 }}
-			transition={{ type: "spring", stiffness: 80, damping: 15 }}
-		>
-			<div className={styles.logoContainer}>
-				<div className={styles.logo}>Naveed</div>
-				<div className={styles.subtitle}>UI/UX Designer/Developer</div>
-			</div>
-
-			<ul className={styles.navLinks}>
-				{navLinks.map(({ href, label }) => (
-					<li key={href}>
-						<a href={href}>{label}</a>
-					</li>
-				))}
-			</ul>
-
-			<div
-				className={styles.hamburger}
-				onClick={() => setMenuOpen((prev) => !prev)}
-				aria-label="Toggle menu"
-				aria-expanded={menuOpen}
+		<>
+			<motion.nav
+				className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
+				initial={{ y: -80, opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ type: "spring", stiffness: 80, damping: 15 }}
 			>
-				<span />
-				<span />
-				<span />
-			</div>
+				<div className={styles.navContent}>
+					{/* Wrap logo and subtitle in container */}
+					<div className={styles.logoWrapper}>
+						<a href="#" className={styles.logo} onClick={scrollToTop}>
+							Naveed
+						</a>
+						<div className={styles.subtitle}>UI/UX Designer/Developer</div>
+					</div>
 
-			<AnimatePresence>
-				{menuOpen && (
-					<motion.ul
-						className={styles.mobileMenu}
-						initial={{ opacity: 0, y: -10 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -10 }}
-						transition={{ duration: 0.2 }}
-					>
+					<ul className={styles.navLinks}>
 						{navLinks.map(({ href, label }) => (
-							<li key={href} onClick={() => setMenuOpen(false)}>
+							<li key={href}>
 								<a href={href}>{label}</a>
 							</li>
 						))}
-					</motion.ul>
-				)}
-			</AnimatePresence>
+					</ul>
 
-			{/* Progress Bar */}
-			<div
-				className={styles.progressBar}
-				style={{ transform: `scaleX(${scrollProgress})`, background: "white" }}
-			></div>
-		</motion.nav>
+					<div
+						className={styles.hamburger}
+						onClick={() => setMenuOpen((prev) => !prev)}
+						aria-label="Toggle menu"
+						aria-expanded={menuOpen}
+					>
+						<span />
+						<span />
+						<span />
+					</div>
+
+					<AnimatePresence>
+						{menuOpen && (
+							<motion.ul
+								className={styles.mobileMenu}
+								initial={{ opacity: 0, y: -10 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -10 }}
+								transition={{ duration: 0.2 }}
+							>
+								{navLinks.map(({ href, label }) => (
+									<li key={href} onClick={() => setMenuOpen(false)}>
+										<a href={href}>{label}</a>
+									</li>
+								))}
+							</motion.ul>
+						)}
+					</AnimatePresence>
+				</div>
+
+				<div className={styles.progressContainer}>
+					<div
+						className={styles.progressBar}
+						style={{
+							transform: `scaleX(${scrollProgress})`,
+							transformOrigin: "left",
+						}}
+					></div>
+				</div>
+			</motion.nav>
+		</>
 	);
 }

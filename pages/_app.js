@@ -1,5 +1,6 @@
 import Head from "next/head";
 import "@/styles/globals.css";
+import CustomCursor from "../components/CustomCursor";
 
 export default function App({ Component, pageProps }) {
 	return (
@@ -15,6 +16,10 @@ export default function App({ Component, pageProps }) {
 					rel="stylesheet"
 				/>
 			</Head>
+
+			{/* Here’s the magic */}
+			<CustomCursor />
+
 			<Component {...pageProps} />
 		</>
 	);
