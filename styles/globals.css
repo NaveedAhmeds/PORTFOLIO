@@ -12,7 +12,6 @@ body,
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	/* overflow-x: hidden; */
 	font-family: "Cinzel", serif;
 	color: var(--foreground);
 	-webkit-font-smoothing: antialiased;
@@ -21,12 +20,24 @@ body,
 }
 
 body {
-	background: none; /* remove bg here, handled by ::before */
+	background: none; /* handled by ::before */
 	position: relative; /* for z-index context */
 	cursor: none !important;
 }
 
-/* Background image layer */
+/* Background image layer with pulse-zoom animation */
+@keyframes pulseZoom {
+	0% {
+		transform: scale(1) translateY(0);
+	}
+	50% {
+		transform: scale(1.03) translateY(-10px);
+	}
+	100% {
+		transform: scale(1) translateY(0);
+	}
+}
+
 body::before {
 	content: "";
 	position: fixed;
@@ -38,17 +49,9 @@ body::before {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	/* background-attachment: fixed; Removed to enable scroll movement */
 	z-index: -1;
-	transform: translateY(var(--bg-translateY, 0)) scale(1);
-	transition: transform 0.1s ease;
-	will-change: transform;
 	cursor: none !important;
-}
-
-/* Zoom + Scroll vertical shift on scroll */
-body.scrolled::before {
-	transform: translateY(var(--bg-translateY, 0)) scale(1.02);
+	animation: pulseZoom 15s ease-in-out infinite;
 }
 
 /* Universal box sizing and reset */

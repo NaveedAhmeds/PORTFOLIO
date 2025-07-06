@@ -1,33 +1,76 @@
-import styles from "./Experience.module.css";
-import { motion } from "framer-motion";
-
-const experiences = [
-	{ role: "Graphic Designer (Freelance)", duration: "1 yr 3 mos" },
-	{ role: "Wow Kebabish", duration: "Nov 2024 – Present (~8 mos)" },
-	{ role: "Web Developer (PT), Wow Kebabish", duration: "2 mos" },
-	{ role: "QA Automation Engineer, PAR Co-op", duration: "4 mos" },
-	{ role: "Web Developer, Seneca Data Science Club", duration: "Current" },
-];
+import React, { useState, useEffect } from "react";
+import TestimonialCard from "./TestimonialCard";
+import ExperienceTimeline from "./ExperienceTimeline";
 
 export default function Experience() {
+	const [bgOpaque, setBgOpaque] = useState(false);
+
+	useEffect(() => {
+		const onScroll = () => {
+			const scrollTop = window.scrollY;
+			setBgOpaque(scrollTop >= 715); // when scrollTop hits 837 or more, bgOpaque = true
+		};
+
+		window.addEventListener("scroll", onScroll);
+		return () => window.removeEventListener("scroll", onScroll);
+	}, []);
+
 	return (
-		<section id="experience" className={styles.experience}>
-			<h2>Experience</h2>
-			<div className={styles.timeline}>
-				{experiences.map((item, idx) => (
-					<motion.div
-						key={idx}
-						className={styles.item}
-						initial={{ opacity: 0, x: -30 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.6, delay: idx * 0.1 }}
-					>
-						<h3>{item.role}</h3>
-						<span>{item.duration}</span>
-					</motion.div>
-				))}
+		<section
+			style={{
+				minHeight: "100vh",
+				padding: "4rem 1rem",
+				color: "white",
+				fontFamily: "'Neue Montreal', sans-serif",
+				position: "relative",
+				overflow: "hidden",
+				backgroundColor: bgOpaque ? "#000" : "transparent",
+				transition: "background-color 0.5s ease",
+				backgroundImage: bgOpaque
+					? `radial-gradient(2px 2px at 10px 10px, rgba(255,255,255,0.15), transparent),
+             radial-gradient(2px 2px at 30px 30px, rgba(255,255,255,0.15), transparent)`
+					: "none",
+				backgroundSize: "40px 40px",
+			}}
+		>
+			<div
+				style={{
+					maxWidth: "900px",
+					margin: "0 auto",
+					textAlign: "center",
+					marginBottom: "4rem",
+				}}
+			>
+				<h2
+					style={{
+						fontSize: "3rem",
+						fontWeight: "700",
+						marginBottom: "0.5rem",
+						fontFamily: "'Cinzel', serif",
+					}}
+				>
+					Professional Experience
+				</h2>
+				<p
+					style={{
+						fontSize: "1.15rem",
+						color: "rgba(255, 255, 255, 0.75)",
+						maxWidth: "600px",
+						margin: "0 auto",
+					}}
+				>
+					A journey through technology and design, building solutions that make
+					a difference.
+				</p>
 			</div>
+
+			{/* Featured testimonial */}
+			<div style={{ marginBottom: "5rem" }}>
+				<TestimonialCard />
+			</div>
+
+			{/* Timeline */}
+			<ExperienceTimeline />
 		</section>
 	);
 }

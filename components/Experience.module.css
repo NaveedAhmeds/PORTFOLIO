@@ -1,39 +1,133 @@
-.experience {
-	padding: 5rem 2rem;
-	background: #fff;
-	color: #333;
-	text-align: center;
-}
-
-.experience h2 {
-	font-size: 2.2rem;
-	margin-bottom: 2rem;
-	font-family: "Cinzel", serif;
-}
-
+/* === TIMELINE CONTAINER === */
 .timeline {
-	max-width: 700px;
+	cursor: none !important;
+	position: relative;
+	padding: 2rem 1rem;
+	max-width: 1200px;
 	margin: 0 auto;
+}
+
+/* === VERTICAL LINE === */
+.timeline::before {
+	cursor: none !important;
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 3px;
+	background: linear-gradient(180deg, #3b82f6, #8b5cf6, #6366f1);
+	transform: translateX(-50%);
+	z-index: 0;
+}
+
+/* === TIMELINE ITEM === */
+.timelineItem {
+	cursor: none !important;
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	align-items: flex-start;
+	position: relative;
+	margin: 2rem 0;
+	max-width: 600px;
 }
 
-.item {
-	background: #f2f2f2;
-	padding: 1rem 1.5rem;
-	border-radius: 10px;
+.timelineItem:nth-child(even) {
+	cursor: none !important;
+	align-items: flex-end;
+}
+
+/* === DOT === */
+.timelineDot {
+	cursor: none !important;
+	position: absolute;
+	top: 0.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 1.2rem;
+	height: 1.2rem;
+	background: #3b82f6;
+	border-radius: 50%;
+	box-shadow: 0 0 10px #6366f1;
+	z-index: 10;
+}
+
+/* === CARD === */
+.timelineContent {
+	cursor: none !important;
+	position: relative;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
+	padding: 1.5rem;
+	border-radius: 1rem;
+	width: 90%;
+	max-width: 500px;
+	box-shadow: 0 6px 25px rgba(255, 255, 255, 0.08);
+	margin-top: 2rem;
+	z-index: 5;
+	transition: all 0.3s ease;
+	cursor: default;
+}
+
+.timelineContent:hover {
+	cursor: none !important;
+	transform: translateY(-5px) scale(1.02);
+	box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+	border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* === EVEN ITEM ALIGN RIGHT === */
+.timelineItem:nth-child(even) .timelineContent {
+	cursor: none !important;
+	align-self: flex-end;
+	text-align: right;
+}
+
+/* === ODD ITEM ALIGN LEFT === */
+.timelineItem:nth-child(odd) .timelineContent {
+	cursor: none !important;
+	align-self: flex-start;
 	text-align: left;
 }
 
-.item h3 {
-	margin: 0 0 0.3rem 0;
-	font-size: 1.2rem;
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 768px) {
+	.timeline::before {
+		left: 12px; /* Shift line to the left a bit */
+		transform: none;
+	}
+
+	.timelineItem,
+	.timelineItem:nth-child(even),
+	.timelineItem:nth-child(odd) {
+		align-items: flex-start !important; /* Force all items left-aligned */
+		max-width: 100%;
+	}
+
+	.timelineDot {
+		left: 12px;
+	}
+
+	.timelineContent {
+		margin-left: 2.5rem;
+		margin-right: 0;
+		width: calc(100% - 3rem);
+		text-align: left !important;
+	}
 }
-.bg-glass {
-	background-color: rgba(0, 0, 0, 0.5);
-	backdrop-filter: blur(5px);
-	border-radius: 12px;
-	padding: 2rem;
-	margin-bottom: 2rem;
+
+/* === SMALLER PHONES === */
+@media (max-width: 400px) {
+	.timelineContent {
+		padding: 1rem 1.2rem;
+		font-size: 0.9rem;
+	}
+
+	.timelineDot {
+		width: 1rem;
+		height: 1rem;
+	}
 }

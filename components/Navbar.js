@@ -13,6 +13,12 @@ export default function Navbar() {
 		{ href: "#contact", label: "Contact" },
 	];
 
+	const scrollToTop = (e) => {
+		e.preventDefault();
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
+	//Navbar - Porgress Listener
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
@@ -20,24 +26,13 @@ export default function Navbar() {
 				document.documentElement.scrollHeight - window.innerHeight;
 			const progress = Math.min(scrollTop / docHeight, 1);
 
-			setScrolled(scrollTop > 10);
 			setScrollProgress(progress);
-
-			if (scrollTop > 10) {
-				document.body.classList.add("scrolled");
-			} else {
-				document.body.classList.remove("scrolled");
-			}
+			// Keep any other scroll-dependent stuff you want, like nav bg or classes
 		};
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
-
-	const scrollToTop = (e) => {
-		e.preventDefault();
-		window.scrollTo({ top: 0, behavior: "smooth" });
-	};
 
 	return (
 		<>
