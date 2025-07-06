@@ -8,6 +8,7 @@
 html,
 body,
 #__next {
+	border: none;
 	height: 100%;
 	width: 100%;
 	margin: 0;
