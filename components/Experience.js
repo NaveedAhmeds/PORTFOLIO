@@ -8,7 +8,7 @@ export default function Experience() {
 	useEffect(() => {
 		const onScroll = () => {
 			const scrollTop = window.scrollY;
-			setBgOpaque(scrollTop >= 715); // when scrollTop hits 837 or more, bgOpaque = true
+			setBgOpaque(scrollTop >= 740); // when scrollTop hits 837 or more, bgOpaque = true
 		};
 
 		window.addEventListener("scroll", onScroll);
