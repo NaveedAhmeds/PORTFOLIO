@@ -51,7 +51,6 @@ const experiences = [
 	},
 ];
 
-// Philosopher quotes to randomly pick from
 const philosopherQuotes = [
 	"“The unexamined life is not worth living.” – Socrates",
 	"“I think therefore I am.” – René Descartes",
@@ -110,6 +109,7 @@ export default function ExperienceTimeline() {
 					background: "linear-gradient(to bottom, #3B82F6, #8B5CF6, #10B981)", // blue->purple->green
 					borderRadius: 2,
 					zIndex: 0,
+					boxShadow: "0 0 12px rgba(99, 102, 241, 0.6)", // added glow here
 				}}
 			/>
 
@@ -118,13 +118,11 @@ export default function ExperienceTimeline() {
 				const isLeft = i % 2 === 0;
 				const Icon = exp.icon;
 
-				// Intersection Observer for reveal animation
 				const [ref, inView] = useInView({
 					triggerOnce: true,
 					threshold: 0.3,
 				});
 
-				// Pick a random quote per item (you can seed it or randomize)
 				const quote = philosopherQuotes[i % philosopherQuotes.length];
 
 				return (
@@ -134,6 +132,7 @@ export default function ExperienceTimeline() {
 						animate={inView ? "onscreen" : "offscreen"}
 						variants={cardVariants}
 						key={i}
+						className="timelineItem" // important for CSS animation
 						style={{
 							display: "flex",
 							flexDirection: isLeft ? "row" : "row-reverse",
@@ -185,7 +184,9 @@ export default function ExperienceTimeline() {
 								cursor: "default",
 								userSelect: "none",
 								outline: "none",
+								transition: "box-shadow 0.3s ease",
 							}}
+							className="timelineContent"
 						>
 							<header
 								style={{

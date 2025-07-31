@@ -8,7 +8,7 @@ export default function Experience() {
 	useEffect(() => {
 		const onScroll = () => {
 			const scrollTop = window.scrollY;
-			setBgOpaque(scrollTop >= 740); // when scrollTop hits 837 or more, bgOpaque = true
+			setBgOpaque(scrollTop >= 780);
 		};
 
 		window.addEventListener("scroll", onScroll);
@@ -18,19 +18,23 @@ export default function Experience() {
 	return (
 		<section
 			style={{
+				"--bg-color": bgOpaque ? "rgba(0,0,0,0.85)" : "transparent",
+				"--blur": bgOpaque ? "10px" : "0px",
+				"--grid-opacity": bgOpaque ? 0.1 : 0,
 				minHeight: "100vh",
 				padding: "4rem 1rem",
 				color: "white",
 				fontFamily: "'Neue Montreal', sans-serif",
 				position: "relative",
 				overflow: "hidden",
-				backgroundColor: bgOpaque ? "#000" : "transparent",
-				transition: "background-color 0.5s ease",
-				backgroundImage: bgOpaque
-					? `radial-gradient(2px 2px at 10px 10px, rgba(255,255,255,0.15), transparent),
-             radial-gradient(2px 2px at 30px 30px, rgba(255,255,255,0.15), transparent)`
-					: "none",
+				backgroundColor: "var(--bg-color)",
+				backdropFilter: "blur(var(--blur))",
+				WebkitBackdropFilter: "blur(var(--blur))",
+				transition: "all 0.6s ease",
+				backgroundImage: `radial-gradient(2px 2px at 10px 10px, rgba(255,255,255,var(--grid-opacity)), transparent),
+                            radial-gradient(2px 2px at 30px 30px, rgba(255,255,255,var(--grid-opacity)), transparent)`,
 				backgroundSize: "40px 40px",
+				boxShadow: bgOpaque ? "inset 0 0 100px rgba(255,255,255,0.05)" : "none",
 			}}
 		>
 			<div
@@ -64,12 +68,10 @@ export default function Experience() {
 				</p>
 			</div>
 
-			{/* Featured testimonial */}
 			<div style={{ marginBottom: "5rem" }}>
 				<TestimonialCard />
 			</div>
 
-			{/* Timeline */}
 			<ExperienceTimeline />
 		</section>
 	);

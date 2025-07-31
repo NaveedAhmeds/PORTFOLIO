@@ -131,3 +131,29 @@
 		height: 1rem;
 	}
 }
+
+.timelineItem .timelineContent {
+	transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.timelineItem:hover .timelineContent {
+	transform: translateY(-5px) scale(1.02);
+	box-shadow:
+		0 0 15px rgba(255, 255, 255, 0.25),
+		0 0 30px rgba(99, 102, 241, 0.3);
+	border-color: rgba(255, 255, 255, 0.4);
+	animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+	0%, 100% {
+		box-shadow:
+			0 0 15px rgba(255, 255, 255, 0.2),
+			0 0 30px rgba(99, 102, 241, 0.2);
+	}
+	50% {
+		box-shadow:
+			0 0 25px rgba(255, 255, 255, 0.35),
+			0 0 40px rgba(99, 102, 241, 0.35);
+	}
+}
