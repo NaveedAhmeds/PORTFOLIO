@@ -28,6 +28,7 @@ export default function Navbar() {
 
 			setScrollProgress(progress);
 			// Keep any other scroll-dependent stuff you want, like nav bg or classes
+			setScrolled(scrollTop > 10);
 		};
 
 		window.addEventListener("scroll", handleScroll);
