@@ -5,7 +5,7 @@ import styles from "./Projects.module.css";
 const projects = [
 	{
 		title: "D.A.V.E",
-		description: "Python & Tkinter app for seamless PDF-DOCX conversions.",
+		description: "Document Adapter & Versatile Encoder Python & Tkinter app for seamless PDF-DOCX conversions.",
 		about: "A desktop app that effortlessly converts PDFs to DOCX and vice versa, improving productivity for document-heavy workflows.",
 		image: "/Images/1.png",
 		video: "https://www.youtube.com/embed/hCChO2X6vrk?autoplay=1",
@@ -16,8 +16,8 @@ const projects = [
 	description: "Modern logistics platform built with Next.js and Tailwind CSS.",
 	about:
 		"A sleek, responsive logistics website inspired by Apple's aesthetic. Built with Next.js and packed with dark mode, smooth animations, and UI polish with back-end API integrations, it's designed for a premium user experience in the world of cargo tracking and management.",
-	image: "/Images/3.png", // Replace with actual screenshot
-	video: "", // Add embed YouTube link here if/when you have a walkthrough
+	image: "/Images/3.png", 
+	video: "", 
 	link: "https://github.com/NaveedAhmeds/JAF-Website"
 	},
 	{
@@ -25,8 +25,8 @@ const projects = [
 	description: "A C++ command-line game using OOP principles.",
 	about:
 		"A terminal-based Tic Tac Toe game written in C++ that showcases object-oriented programming through clear class separation, gameplay logic, and error handling.",
-	image: "/Images/.png",
-	video: "", 
+	image: "/Images/3.webp",
+	video: "https://www.youtube.com/embed/KeIpPV6h8CE?autoplay=1&mute=1&loop=1&playlist=KeIpPV6h8CE", 
 	link: "https://github.com/NaveedAhmeds/Tic-Tac-Toe-Game"
 	},
 	{

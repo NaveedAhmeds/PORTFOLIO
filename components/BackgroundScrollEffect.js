@@ -7,9 +7,6 @@ export default function BackgroundScrollEffect() {
 			const maxTranslate = -100; // Negative means background moves UP by max 100px
 			const translateY = Math.max(scrollTop * -0.5, maxTranslate);
 
-			// Debugging:
-			console.log("ScrollTop:", scrollTop, "TranslateY:", translateY);
-
 			document.body.style.setProperty("--bg-translateY", `${translateY}px`);
 		};
 

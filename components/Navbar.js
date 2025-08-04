@@ -8,7 +8,7 @@ export default function Navbar() {
 	const [scrollProgress, setScrollProgress] = useState(0);
 
 	const navLinks = [
-		{ href: "#ExperienceTimeline.js", label: "Experience" },
+		{ href: "#ExperienceTimeline", label: "Experience" },
 		{ href: "#projects", label: "Projects" },
 		{ href: "#contact", label: "Contact" },
 	];
