@@ -12,11 +12,20 @@ const projects = [
 		link: "https://github.com/NaveedAhmeds/DAVE",
 	},
 	{
+	title: "JAF Logistics Website",
+	description: "Modern logistics platform built with Next.js and Tailwind CSS.",
+	about:
+		"A sleek, responsive logistics website inspired by Apple's aesthetic. Built with Next.js and packed with dark mode, smooth animations, and UI polish with back-end API integrations, it's designed for a premium user experience in the world of cargo tracking and management.",
+	image: "/Images/3.png", // Replace with actual screenshot
+	video: "", // Add embed YouTube link here if/when you have a walkthrough
+	link: "https://github.com/NaveedAhmeds/JAF-Website"
+	},
+	{
 	title: "Tic Tac Toe",
 	description: "A C++ command-line game using OOP principles.",
 	about:
 		"A terminal-based Tic Tac Toe game written in C++ that showcases object-oriented programming through clear class separation, gameplay logic, and error handling.",
-	image: "/Images/2.png",
+	image: "/Images/.png",
 	video: "", 
 	link: "https://github.com/NaveedAhmeds/Tic-Tac-Toe-Game"
 	},
@@ -26,9 +35,9 @@ const projects = [
 			"Mobile-responsive web app with dynamic artist and song content.",
 		about:
 			"An immersive streaming platform that adapts to your mood, delivering your favorite artists and tracks seamlessly on any device.",
-		image: "/images/music-streaming-thumb.jpg",
-		video: "https://www.youtube.com/embed/V-_O7nl0Ii0?autoplay=1&mute=1&loop=1&playlist=V-_O7nl0Ii0",
-		link: "https://github.com/NaveedAhmeds/MusicStreamer",
+		image: "/Images/2.png",
+		video: "https://www.youtube.com/embed/uVtk1rjVCSg?autoplay=1&mute=1&loop=1&playlist=uVtk1rjVCSg",
+		link: "https://github.com/NaveedAhmeds/Streamer"
 	},
 	// Add 3 more projects similarly with image, about, and video
 	{
@@ -139,7 +148,7 @@ export default function Projects() {
 								rel="noopener noreferrer"
 								className={styles.githubLink}
 							>
-								View Source on GitHub
+								View Project
 							</a>
 						</motion.div>
 					</motion.div>
