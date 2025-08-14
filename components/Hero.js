@@ -10,6 +10,7 @@ export default function Hero() {
     }
   };
 
+  //Font change for the main page required...
   return (
     <section className={styles.hero}>
       <motion.div

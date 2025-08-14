@@ -3,6 +3,9 @@ import { Code, Palette, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
+//Fixature for the phone aspect ratio required...
+
+
 const experiences = [
 	{
 		title: "Web Developer",

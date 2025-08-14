@@ -2,6 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Projects.module.css";
 
+//Work on completion of the other projects required...
+
+
 const projects = [
 	{
 		title: "D.A.V.E",
