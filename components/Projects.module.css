@@ -1,12 +1,12 @@
 /* Projects Section Styles */
-
 .projectsSection {
 	margin-top: 5rem;
-	max-width: 1000px;
+	max-width: 1400px; /* wider for bigger cards */
 	margin-left: auto;
 	margin-right: auto;
 	padding: 0 1.5rem;
 	color: #e0e0e0;
+	position: relative;
 }
 
 .projectsSection h2 {
@@ -24,19 +24,19 @@
 	cursor: none;
 	display: grid;
 	gap: 2.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	grid-template-columns: repeat(3, minmax(350px, 1fr)); /* wider cards */
+	justify-content: center;
 }
 
 /* Individual Card */
 .projectCard {
 	cursor: none;
 	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(2px);
+	backdrop-filter: blur(4px);
 	-webkit-backdrop-filter: blur(14px);
 	border-radius: 10px;
 	padding: 2rem 2rem 3rem;
 	color: #cbd5e1;
-	cursor: pointer;
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 	transition: box-shadow 0.1s ease, transform 0.1s ease;
 	display: flex;
@@ -45,13 +45,15 @@
 	gap: 1rem;
 	text-align: center;
 	border: 1px solid rgba(255, 255, 255, 0.15);
+	width: 100%;
+	max-width: 400px;
 }
 
 .projectCard:hover,
 .projectCard:focus-visible {
-	cursor: none;
+	cursor: none !important;
 	box-shadow: 0 12px 40px rgba(59, 130, 246, 0.7);
-	transform: translateY(-2px);
+	transform: translateY(-0px);
 	border-color: rgba(59, 130, 246, 0.9);
 	outline: none;
 }
@@ -99,33 +101,16 @@
 	backdrop-filter: blur(2px);
 	-webkit-backdrop-filter: blur(18px);
 	border-radius: 20px;
-	padding: 2rem 3rem;
-	max-width: 720px;
-	width: 100%;
+	padding: 2rem 3rem; /* bigger padding for larger modal */
+	max-width: 900px; /* wider modal */
+	width: 90%;
 	color: #e0e0e0;
 	position: relative;
-	box-shadow: 0 10px 40px rgba(59, 130, 246, 0.7);
+	box-shadow: 0 12px 50px rgba(59, 130, 246, 0.7);
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
-}
-
-/* Close Modal Button */
-.closeButton {
-	position: absolute;
-	top: 1rem;
-	right: 1.5rem;
-	background: transparent;
-	border: none;
-	font-size: 2.5rem;
-	color: #dbeafe;
-	cursor: pointer;
-	transition: color 0.1s ease;
-}
-
-.closeButton:hover {
-	color: #3b82f6;
+	gap: 2rem;
 }
 
 /* Text inside modal */
@@ -139,7 +124,7 @@
 /* Embedded video wrapper */
 .videoWrapper {
 	position: relative;
-	padding-bottom: 56.25%; /* 16:9 aspect ratio */
+	padding-bottom: 56.25%;
 	height: 0;
 	overflow: hidden;
 	border-radius: 14px;
@@ -155,33 +140,67 @@
 	border-radius: 14px;
 }
 
-/* GitHub Link */
-.githubLink {
+/* Modal Buttons */
+.modalButtons {
+	display: flex;
+	justify-content: center;
+	gap: 1.5rem;
 	margin-top: 1rem;
-	font-weight: 700;
-	color: #3b82f6;
-	text-decoration: underline;
-	transition: color 0.3s ease;
-	align-self: center;
 }
 
-.githubLink:hover,
-.githubLink:focus {
-	color: #60a5fa;
+.projectButton {
+	background: #3b82f6;
+	color: #fff;
+	font-family: 'Neue Montreal', sans-serif;
+	font-weight: 700;
+	border: none;
+	padding: 0.75rem 1.5rem;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.projectButton:hover,
+.projectButton:focus {
+	background: #60a5fa;
+	transform: translateY(-1px);
 	outline: none;
 }
 
 /* Responsive Tweaks */
+@media (max-width: 1200px) {
+	.projectsGrid {
+		grid-template-columns: repeat(2, minmax(300px, 1fr));
+	}
+	.modalContent {
+		padding: 2rem 2.5rem;
+		max-width: 700px;
+	}
+}
+
 @media (max-width: 768px) {
 	.projectsSection h2 {
 		font-size: 2rem;
 	}
-
 	.projectCard {
 		padding: 1.5rem 1rem 2.5rem;
+		max-width: 100%;
 	}
-
 	.modalContent {
 		padding: 1.5rem 1.5rem;
+		width: 95%;
+	}
+	.modalButtons {
+		flex-direction: column;
+	}
+	.projectButton {
+		width: 100%;
+		padding: 0.75rem 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.projectsGrid {
+		grid-template-columns: 1fr;
 	}
 }
