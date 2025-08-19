@@ -2,35 +2,40 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Projects.module.css";
 
-//Work on completion of the other projects required...
-
-
 const projects = [
 	{
 		title: "D.A.V.E",
 		description: "Document Adapter & Versatile Encoder Python & Tkinter app for seamless PDF-DOCX conversions.",
 		about: "A desktop app that effortlessly converts PDFs to DOCX and vice versa, improving productivity for document-heavy workflows.",
-		image: "/Images/1.png",
+		image: "/Images/dave.jpg",
 		video: "https://www.youtube.com/embed/hCChO2X6vrk?autoplay=1",
 		link: "https://github.com/NaveedAhmeds/DAVE",
 	},
 	{
-	title: "JAF Logistics Website",
-	description: "Modern logistics platform built with Next.js and Tailwind CSS.",
-	about:
-		"A sleek, responsive logistics website inspired by Apple's aesthetic. Built with Next.js and packed with dark mode, smooth animations, and UI polish with back-end API integrations, it's designed for a premium user experience in the world of cargo tracking and management.",
-	image: "/Images/3.png", 
-	video: "", 
-	link: "https://github.com/NaveedAhmeds/JAF-Website"
+		title: "Historian",
+		description: "A modern Next.js web app designed to help art lovers explore and discover artworks with powerful search features and a clean, stylish interface.",
+		about: "Historian is a web application designed to bridge the gap between art enthusiasts and the rich tapestry of global art history. Built with Next.js and leveraging modern web technologies, Historian offers an intuitive platform for discovering, exploring, and learning about artworks from diverse cultures and time periods.",
+		image: "/Images/Historian.jpg",
+		video: "",
+		link: "#",
 	},
 	{
-	title: "Tic Tac Toe",
-	description: "A C++ command-line game using OOP principles.",
-	about:
-		"A terminal-based Tic Tac Toe game written in C++ that showcases object-oriented programming through clear class separation, gameplay logic, and error handling.",
-	image: "/Images/3.webp",
-	video: "https://www.youtube.com/embed/KeIpPV6h8CE?autoplay=1&mute=1&loop=1&playlist=KeIpPV6h8CE", 
-	link: "https://github.com/NaveedAhmeds/Tic-Tac-Toe-Game"
+		title: "JAF Logistics Website",
+		description: "Modern logistics platform built with Next.js and Tailwind CSS.",
+		about:
+			"A sleek, responsive logistics website inspired by Apple's aesthetic. Built with Next.js and packed with dark mode, smooth animations, and UI polish with back-end API integrations, it's designed for a premium user experience in the world of cargo tracking and management.",
+		image: "/Images/JAF_logo.jpeg",
+		video: "",
+		link: "https://github.com/NaveedAhmeds/JAF-Website"
+	},
+	{
+		title: "Tic Tac Toe",
+		description: "A C++ command-line game using OOP principles.",
+		about:
+			"A terminal-based Tic Tac Toe game written in C++ that showcases object-oriented programming through clear class separation, gameplay logic, and error handling.",
+		image: "/Images/3.webp",
+		video: "https://www.youtube.com/embed/KeIpPV6h8CE?autoplay=1&mute=1&loop=1&playlist=KeIpPV6h8CE",
+		link: "https://github.com/NaveedAhmeds/Tic-Tac-Toe-Game"
 	},
 	{
 		title: "Music Streaming Web App",
@@ -41,15 +46,6 @@ const projects = [
 		image: "/Images/2.png",
 		video: "https://www.youtube.com/embed/uVtk1rjVCSg?autoplay=1&mute=1&loop=1&playlist=uVtk1rjVCSg",
 		link: "https://github.com/NaveedAhmeds/Streamer"
-	},
-	// Add 3 more projects similarly with image, about, and video
-	{
-		title: "Project Four",
-		description: "Description for project four.",
-		about: "Detailed about info for project four.",
-		image: "/images/project4-thumb.jpg",
-		video: "https://www.youtube.com/embed/XXXXXXXXX?autoplay=1&mute=1&loop=1&playlist=XXXXXXXXX",
-		link: "#",
 	},
 	{
 		title: "Project Five",
@@ -76,6 +72,9 @@ export default function Projects() {
 
 	return (
 		<section id="projects" className={styles.projectsSection}>
+			{/* Background grid effect */}
+			<div className={styles.gridBg}></div>
+
 			<h2>Projects</h2>
 			<div className={styles.projectsGrid}>
 				{projects.map(({ title, description, image }, i) => (
