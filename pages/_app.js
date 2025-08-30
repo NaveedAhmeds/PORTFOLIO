@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }) {
 
 			{/* Here’s the magic */}
 			<CustomCursor />
-
 			<Component {...pageProps} />
 		</>
 	);
