@@ -5,6 +5,8 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Experience from "@/components/Experience";
 
+//test run to be initialized...
+
 export default function Home() {
 	return (
 		<>
