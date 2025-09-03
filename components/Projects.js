@@ -26,32 +26,21 @@ const projects = [
 	},
 	{
 		title: "Historian",
-		description:
-			"Art history web app with powerful search and user authentication.",
+		description: "Personal history and journaling web application.",
 		about:
-			"A web application that allows users to explore and filter artworks by various criteria. Features user authentication with JWT for saving favorites.",
-		image: "/Images/3.png",
+			"A full-stack web app for journaling and historical note tracking. Responsive, sleek UI, and uses a modern database backend.",
+		image: "/Images/historian.png",
 		video: "",
 		link: "https://github.com/NaveedAhmeds/Historian",
 	},
 	{
 		title: "Matrix Auto Login",
-		description:
-			"Automated SSH login to Seneca Matrix server using stored credentials.",
+		description: "Python automation for secure Matrix account login.",
 		about:
-			"Scripts that automate the SSH login process to the Seneca Matrix server, prompting user confirmation before login. Compatible with Unix-like and Windows systems.",
-		image: "/Images/2.png",
+			"Automates the login process for Matrix accounts using Python scripts with error handling and secure credential management.",
+		image: "/Images/matrix.png",
 		video: "",
 		link: "https://github.com/NaveedAhmeds/matrixAutoLogin",
-	},
-	{
-		title: "JAF Logistics Website",
-		description: "Modern Next.js + Tailwind CSS logistics platform UI.",
-		about:
-			"A sleek logistics site inspired by Apple's design principles. Fully responsive, dark mode support, animations, and a backend API for real-time updates.",
-		image: "/Images/3.png",
-		video: "",
-		link: "https://github.com/NaveedAhmeds/JAF-Website",
 	},
 	{
 		title: "Tic Tac Toe",
@@ -83,19 +72,24 @@ export default function Projects() {
 		offset: ["start end", "end start"],
 	});
 
+	const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+	const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
 	const quote =
 		philosophyQuotes[Math.floor(Math.random() * philosophyQuotes.length)];
 
 	return (
 		<section ref={sectionRef} className={styles.projectsSection}>
-			{/* Animated coding background */}
+			{/* Background */}
 			<motion.div
-				className={styles.codeBg}
+				className={styles.animatedBg}
 				style={{
-					opacity: 1,
+					opacity: bgOpacity,
+					y: bgY,
 				}}
 				aria-hidden
 			/>
+
 			{/* Quote & Title */}
 			<motion.p
 				className={styles.philosophyQuote}
@@ -106,6 +100,7 @@ export default function Projects() {
 			>
 				{quote}
 			</motion.p>
+
 			<motion.h2
 				className={styles.sectionTitle}
 				initial={{ opacity: 0, y: 20 }}
@@ -115,6 +110,7 @@ export default function Projects() {
 			>
 				Projects
 			</motion.h2>
+
 			{/* Projects Grid */}
 			<div className={styles.projectsGrid}>
 				{projects.map((project, idx) => (
@@ -123,12 +119,12 @@ export default function Projects() {
 						className={styles.projectCard}
 						initial={{ opacity: 0, y: 50 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.4, delay: idx * 0.15 }}
+						transition={{ duration: 0.3, delay: idx * 0.1 }}
 						viewport={{ once: true }}
 						whileHover={{
 							y: -4,
-							scale: 1.02,
-							transition: { duration: 0.15 },
+							scale: 1.03,
+							boxShadow: "0 6px 30px rgba(255, 255, 255, 0.05)",
 						}}
 						onClick={() => setSelected(project)}
 					>
@@ -146,6 +142,7 @@ export default function Projects() {
 					</motion.div>
 				))}
 			</div>
+
 			{/* Modal */}
 			<AnimatePresence>
 				{selected && (
