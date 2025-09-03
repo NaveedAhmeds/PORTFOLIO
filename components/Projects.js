@@ -1,35 +1,63 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+	motion,
+	AnimatePresence,
+	useScroll,
+	useTransform,
+} from "framer-motion";
 import styles from "./Projects.module.css";
 
-//Work on completion of the other projects required...
+const philosophyQuotes = [
+	"“Simplicity is the ultimate sophistication.” – Leonardo da Vinci",
+	"“The details are not the details. They make the design.” – Charles Eames",
+	"“The unexamined life is not worth living.” – Socrates",
+];
 
 const projects = [
 	{
 		title: "D.A.V.E",
 		description:
-			"Document Adapter & Versatile Encoder Python & Tkinter app for seamless PDF-DOCX conversions.",
+			"Seamless PDF-DOCX conversion, Python/Tkinter desktop utility.",
 		about:
-			"A desktop app that effortlessly converts PDFs to DOCX and vice versa, improving productivity for document-heavy workflows.",
+			"A desktop app that converts PDFs to DOCX and vice versa for document-heavy workflows. Built with Python and Tkinter, focusing on clean UI and reliable performance.",
 		image: "/Images/1.png",
 		video: "https://www.youtube.com/embed/hCChO2X6vrk?autoplay=1",
 		link: "https://github.com/NaveedAhmeds/DAVE",
 	},
 	{
-		title: "JAF Logistics Website",
+		title: "Historian",
 		description:
-			"Modern logistics platform built with Next.js and Tailwind CSS.",
+			"Art history web app with powerful search and user authentication.",
 		about:
-			"A sleek, responsive logistics website inspired by Apple's aesthetic. Built with Next.js and packed with dark mode, smooth animations, and UI polish with back-end API integrations, it's designed for a premium user experience in the world of cargo tracking and management.",
+			"A web application that allows users to explore and filter artworks by various criteria. Features user authentication with JWT for saving favorites.",
+		image: "/Images/3.png",
+		video: "",
+		link: "https://github.com/NaveedAhmeds/Historian",
+	},
+	{
+		title: "Matrix Auto Login",
+		description:
+			"Automated SSH login to Seneca Matrix server using stored credentials.",
+		about:
+			"Scripts that automate the SSH login process to the Seneca Matrix server, prompting user confirmation before login. Compatible with Unix-like and Windows systems.",
+		image: "/Images/2.png",
+		video: "",
+		link: "https://github.com/NaveedAhmeds/matrixAutoLogin",
+	},
+	{
+		title: "JAF Logistics Website",
+		description: "Modern Next.js + Tailwind CSS logistics platform UI.",
+		about:
+			"A sleek logistics site inspired by Apple's design principles. Fully responsive, dark mode support, animations, and a backend API for real-time updates.",
 		image: "/Images/3.png",
 		video: "",
 		link: "https://github.com/NaveedAhmeds/JAF-Website",
 	},
 	{
 		title: "Tic Tac Toe",
-		description: "A C++ command-line game using OOP principles.",
+		description: "OOP-focused C++ terminal game.",
 		about:
-			"A terminal-based Tic Tac Toe game written in C++ that showcases object-oriented programming through clear class separation, gameplay logic, and error handling.",
+			"A fun C++ terminal Tic Tac Toe game with object-oriented structure, error handling, and AI opponent for single-player mode.",
 		image: "/Images/3.webp",
 		video:
 			"https://www.youtube.com/embed/KeIpPV6h8CE?autoplay=1&mute=1&loop=1&playlist=KeIpPV6h8CE",
@@ -37,134 +65,138 @@ const projects = [
 	},
 	{
 		title: "Music Streaming Web App",
-		description:
-			"Mobile-responsive web app with dynamic artist and song content.",
+		description: "Mobile web app, dynamic artist/song display.",
 		about:
-			"An immersive streaming platform that adapts to your mood, delivering your favorite artists and tracks seamlessly on any device.",
+			"A fully responsive streaming platform built with modern JavaScript frameworks. Auto-updating playlists, mood-based recommendations, and smooth UI transitions.",
 		image: "/Images/2.png",
 		video:
 			"https://www.youtube.com/embed/uVtk1rjVCSg?autoplay=1&mute=1&loop=1&playlist=uVtk1rjVCSg",
 		link: "https://github.com/NaveedAhmeds/Streamer",
 	},
-	// Add 3 more projects similarly with image, about, and video
-	{
-		title: "Project Four",
-		description: "Description for project four.",
-		about: "Detailed about info for project four.",
-		image: "/images/project4-thumb.jpg",
-		video:
-			"https://www.youtube.com/embed/XXXXXXXXX?autoplay=1&mute=1&loop=1&playlist=XXXXXXXXX",
-		link: "#",
-	},
-	{
-		title: "Project Five",
-		description: "Description for project five.",
-		about: "Detailed about info for project five.",
-		image: "/images/project5-thumb.jpg",
-		video:
-			"https://www.youtube.com/embed/YYYYYYYYY?autoplay=1&mute=1&loop=1&playlist=YYYYYYYYY",
-		link: "#",
-	},
-	{
-		title: "Project Six",
-		description: "Description for project six.",
-		about: "Detailed about info for project six.",
-		image: "/images/project6-thumb.jpg",
-		video:
-			"https://www.youtube.com/embed/ZZZZZZZZZ?autoplay=1&mute=1&loop=1&playlist=ZZZZZZZZZ",
-		link: "#",
-	},
 ];
 
 export default function Projects() {
-	const [selectedProject, setSelectedProject] = useState(null);
+	const [selected, setSelected] = useState(null);
+	const sectionRef = useRef(null);
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start end", "end start"],
+	});
 
-	const closeModal = () => setSelectedProject(null);
+	const quote =
+		philosophyQuotes[Math.floor(Math.random() * philosophyQuotes.length)];
 
 	return (
-		<section id="projects" className={styles.projectsSection}>
-			<h2>Projects</h2>
+		<section ref={sectionRef} className={styles.projectsSection}>
+			{/* Animated coding background */}
+			<motion.div
+				className={styles.codeBg}
+				style={{
+					opacity: 1,
+				}}
+				aria-hidden
+			/>
+			{/* Quote & Title */}
+			<motion.p
+				className={styles.philosophyQuote}
+				initial={{ opacity: 0, y: 30 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.7 }}
+				viewport={{ once: true }}
+			>
+				{quote}
+			</motion.p>
+			<motion.h2
+				className={styles.sectionTitle}
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.6 }}
+				viewport={{ once: true }}
+			>
+				Projects
+			</motion.h2>
+			{/* Projects Grid */}
 			<div className={styles.projectsGrid}>
-				{projects.map(({ title, description, image }, i) => (
+				{projects.map((project, idx) => (
 					<motion.div
-						key={title}
+						key={project.title}
 						className={styles.projectCard}
-						onClick={() => setSelectedProject(projects[i])}
+						initial={{ opacity: 0, y: 50 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.4, delay: idx * 0.15 }}
+						viewport={{ once: true }}
 						whileHover={{
-							scale: 1.05,
-							boxShadow: "0 8px 25px rgba(59, 130, 246, 0.5)",
+							y: -4,
+							scale: 1.02,
+							transition: { duration: 0.15 },
 						}}
-						transition={{ type: "spring", stiffness: 300 }}
-						tabIndex={0}
-						role="button"
-						onKeyDown={(e) => {
-							if (e.key === "Enter" || e.key === " ")
-								setSelectedProject(projects[i]);
-						}}
-						aria-label={`Open details for project ${title}`}
+						onClick={() => setSelected(project)}
 					>
 						<img
-							src={image}
-							alt={`${title} thumbnail`}
+							src={project.image}
+							alt={`${project.title} thumbnail`}
 							className={styles.projectImage}
+							loading="lazy"
 						/>
-						<h3>{title}</h3>
-						<p>{description}</p>
+						<div className={styles.projectText}>
+							<h3 className={styles.cardTitle}>{project.title}</h3>
+							<p className={styles.cardDesc}>{project.description}</p>
+							<p className={styles.cardAbout}>{project.about}</p>
+						</div>
 					</motion.div>
 				))}
 			</div>
-
 			{/* Modal */}
 			<AnimatePresence>
-				{selectedProject && (
+				{selected && (
 					<motion.div
 						className={styles.modalBackdrop}
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						onClick={closeModal}
-						aria-modal="true"
-						role="dialog"
-						aria-labelledby="modal-title"
-						aria-describedby="modal-desc"
+						onClick={() => setSelected(null)}
 					>
 						<motion.div
 							className={styles.modalContent}
-							initial={{ scale: 0.8, opacity: 0 }}
-							animate={{ scale: 1, opacity: 1 }}
-							exit={{ scale: 0.8, opacity: 0 }}
-							transition={{ type: "spring", stiffness: 300, damping: 25 }}
+							initial={{ scale: 0.9, opacity: 0, y: 80 }}
+							animate={{ scale: 1, opacity: 1, y: 0 }}
+							exit={{ scale: 0.9, opacity: 0, y: 120 }}
+							transition={{ type: "spring", stiffness: 200, damping: 25 }}
 							onClick={(e) => e.stopPropagation()}
 						>
 							<button
 								className={styles.closeButton}
-								onClick={closeModal}
-								aria-label="Close project details"
+								onClick={() => setSelected(null)}
 							>
-								&times;
+								×
 							</button>
-
-							<h3 id="modal-title">{selectedProject.title}</h3>
-							<p id="modal-desc" className={styles.aboutText}>
-								{selectedProject.about}
-							</p>
-							<div className={styles.videoWrapper}>
-								<iframe
-									src={selectedProject.video}
-									title={`${selectedProject.title} demo video`}
-									frameBorder="0"
-									allow="autoplay; encrypted-media"
-									allowFullScreen
-								></iframe>
+							<h3 className={styles.modalTitle}>{selected.title}</h3>
+							<p className={styles.modalDesc}>{selected.about}</p>
+							{selected.video ? (
+								<div className={styles.videoWrapper}>
+									<iframe
+										src={selected.video}
+										title={`${selected.title} demo video`}
+										frameBorder="0"
+										allow="autoplay; encrypted-media"
+										allowFullScreen
+									/>
+								</div>
+							) : (
+								<div className={styles.videoWrapperPlaceholder}>
+									<span>No Demo Video</span>
+								</div>
+							)}
+							<div className={styles.modalButtonContainer}>
+								<a
+									href={selected.link}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={styles.githubLink}
+								>
+									View on GitHub
+								</a>
 							</div>
-							<a
-								href={selectedProject.link}
-								target="_blank"
-								rel="noopener noreferrer"
-								className={styles.githubLink}
-							>
-								View Project
-							</a>
 						</motion.div>
 					</motion.div>
 				)}
