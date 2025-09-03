@@ -3,8 +3,6 @@ import { Code, Palette, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-//Need to work on the phone part...
-
 const experiences = [
 	{
 		title: "Web Developer",
@@ -65,12 +63,11 @@ const philosopherQuotes = [
 ];
 
 const cardVariants = {
-	offscreen: { opacity: 0, y: 50, rotateX: 15 },
+	offscreen: { opacity: 0, y: 40 },
 	onscreen: {
 		opacity: 1,
 		y: 0,
-		rotateX: 0,
-		transition: { type: "spring", bounce: 0.3, duration: 0.6 },
+		transition: { type: "spring", bounce: 0.25, duration: 0.5 },
 	},
 };
 
@@ -79,7 +76,7 @@ const quoteVariants = {
 	visible: {
 		opacity: 1,
 		x: 0,
-		transition: { type: "spring", stiffness: 50, damping: 12, duration: 0.8 },
+		transition: { type: "spring", stiffness: 50, damping: 12, duration: 0.7 },
 	},
 };
 
@@ -88,12 +85,15 @@ export default function ExperienceTimeline() {
 		<div
 			style={{
 				position: "relative",
-				padding: "2rem 1rem",
-				maxWidth: 900,
+				padding: "3rem 1rem",
+				maxWidth: 1000,
 				margin: "0 auto",
+				background: "#0d0d0d", // Apple-style black coding vibe
+				borderRadius: "1rem",
+				overflow: "hidden",
 			}}
 		>
-			{/* Vertical timeline line */}
+			{/* Timeline Line */}
 			<div
 				aria-hidden="true"
 				style={{
@@ -106,7 +106,7 @@ export default function ExperienceTimeline() {
 					background: "linear-gradient(to bottom, #3B82F6, #8B5CF6, #10B981)",
 					borderRadius: 2,
 					zIndex: 0,
-					boxShadow: "0 0 12px rgba(99, 102, 241, 0.6)",
+					boxShadow: "0 0 12px rgba(99, 102, 241, 0.5)",
 				}}
 			/>
 
@@ -119,29 +119,27 @@ export default function ExperienceTimeline() {
 				return (
 					<motion.article
 						ref={ref}
+						key={i}
 						initial="offscreen"
 						animate={inView ? "onscreen" : "offscreen"}
 						variants={cardVariants}
-						key={i}
-						className="timelineItem"
 						style={{
 							display: "flex",
-							flexDirection: "row",
+							flexDirection: isLeft ? "row" : "row-reverse",
 							alignItems: "flex-start",
-							justifyContent: "flex-start",
-							marginBottom: "3rem",
+							justifyContent: "space-between",
+							marginBottom: "4rem",
 							position: "relative",
 							zIndex: 1,
-							perspective: 800,
-							flexWrap: "wrap", // allow wrapping on small screens
+							flexWrap: "wrap",
 						}}
 						whileHover={{
-							rotateX: -10,
-							rotateY: isLeft ? 10 : -10,
-							scale: 1.05,
-							transition: { type: "spring", stiffness: 300, damping: 20 },
+							rotateX: -3,
+							rotateY: isLeft ? 3 : -3,
+							scale: 1.03,
+							transition: { type: "spring", stiffness: 300, damping: 18 },
 						}}
-						whileTap={{ scale: 0.95 }}
+						whileTap={{ scale: 0.97 }}
 					>
 						{/* Dot */}
 						<div
@@ -155,7 +153,7 @@ export default function ExperienceTimeline() {
 								height: 16,
 								backgroundColor: exp.color,
 								borderRadius: "50%",
-								border: "3px solid #000",
+								border: "3px solid #0d0d0d",
 								boxShadow: `0 0 8px ${exp.color}88`,
 								zIndex: 2,
 							}}
@@ -166,18 +164,17 @@ export default function ExperienceTimeline() {
 							role="region"
 							tabIndex={0}
 							style={{
-								background: "rgba(255, 255, 255, 0.1)",
-								backdropFilter: "blur(12px)",
-								WebkitBackdropFilter: "blur(12px)",
+								background: "#1b1b1b",
 								borderRadius: "1rem",
-								padding: "1rem 1.5rem",
-								boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+								padding: "1.5rem 2rem",
+								boxShadow: "0 6px 25px rgba(0,0,0,0.6)",
 								maxWidth: "45%",
 								cursor: "default",
 								userSelect: "none",
 								outline: "none",
-								transition: "box-shadow 0.3s ease",
-								flex: "1 1 100%", // full width on mobile
+								transition: "all 0.25s ease",
+								flex: "1 1 100%",
+								marginBottom: "1rem",
 							}}
 						>
 							<header
@@ -192,25 +189,25 @@ export default function ExperienceTimeline() {
 								<div
 									style={{
 										backgroundColor: exp.color + "33",
-										padding: "0.4rem",
+										padding: "0.5rem",
 										borderRadius: "0.5rem",
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "center",
-										width: 36,
-										height: 36,
+										width: 40,
+										height: 40,
 									}}
 								>
-									<Icon size={20} color={exp.color} />
+									<Icon size={22} color={exp.color} />
 								</div>
 								<div>
 									<h4
 										style={{
 											margin: 0,
-											fontWeight: "700",
-											color: "white",
+											fontWeight: 700,
+											color: "#fff",
 											fontFamily: "'Cinzel', serif",
-											fontSize: "1.2rem",
+											fontSize: "1.3rem",
 										}}
 									>
 										{exp.title}
@@ -218,10 +215,10 @@ export default function ExperienceTimeline() {
 									<p
 										style={{
 											margin: 0,
-											fontWeight: "600",
+											fontWeight: 600,
 											color: exp.color,
 											fontFamily: "'Neue Montreal', sans-serif",
-											fontSize: "0.85rem",
+											fontSize: "0.9rem",
 										}}
 									>
 										{exp.company} &bull; {exp.type}
@@ -230,9 +227,9 @@ export default function ExperienceTimeline() {
 							</header>
 							<p
 								style={{
-									color: "rgba(255,255,255,0.8)",
+									color: "rgba(255,255,255,0.85)",
 									fontFamily: "'Neue Montreal', sans-serif",
-									fontSize: "0.95rem",
+									fontSize: "1rem",
 									marginBottom: "0.5rem",
 								}}
 							>
@@ -243,10 +240,10 @@ export default function ExperienceTimeline() {
 									margin: 0,
 									paddingLeft: "1rem",
 									color: "rgba(255,255,255,0.7)",
-									fontSize: "0.85rem",
+									fontSize: "0.9rem",
 									fontFamily: "'Neue Montreal', sans-serif",
 									listStyleType: "disc",
-									lineHeight: 1.3,
+									lineHeight: 1.4,
 								}}
 							>
 								{exp.details.map((d, idx) => (
@@ -264,7 +261,7 @@ export default function ExperienceTimeline() {
 								maxWidth: "45%",
 								marginLeft: isLeft ? "2rem" : "0",
 								marginRight: isLeft ? "0" : "2rem",
-								color: "#ddd",
+								color: "#fff",
 								fontStyle: "italic",
 								fontFamily: "'Cinzel', serif",
 								fontSize: "1.1rem",
@@ -273,13 +270,13 @@ export default function ExperienceTimeline() {
 								pointerEvents: "none",
 								padding: "1rem",
 								borderRadius: "1rem",
-								background: "rgba(255, 255, 255, 0.05)",
+								background: "rgba(255,255,255,0.05)",
 								boxShadow: isLeft
-									? "4px 4px 10px rgba(0,0,0,0.2)"
-									: "-4px 4px 10px rgba(0,0,0,0.2)",
-								backdropFilter: "blur(8px)",
-								WebkitBackdropFilter: "blur(8px)",
-								flex: "1 1 100%", // stack on mobile
+									? "4px 4px 12px rgba(0,0,0,0.25)"
+									: "-4px 4px 12px rgba(0,0,0,0.25)",
+								backdropFilter: "blur(6px)",
+								WebkitBackdropFilter: "blur(6px)",
+								flex: "1 1 100%",
 								marginTop: "1rem",
 							}}
 							aria-hidden="true"
