@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Code, Palette, Globe } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const experiences = [
@@ -62,14 +62,20 @@ const philosopherQuotes = [
 	"“To be is to be perceived.” – George Berkeley",
 ];
 
-const cardVariants = {
-	offscreen: { opacity: 0, y: 40 },
-	onscreen: {
-		opacity: 1,
-		y: 0,
-		transition: { type: "spring", bounce: 0.25, duration: 0.5 },
-	},
-};
+// Hook for typing effect
+function useTyping(text, speed = 70) {
+	const [typed, setTyped] = React.useState("");
+	React.useEffect(() => {
+		let index = 0;
+		let interval = setInterval(() => {
+			setTyped((prev) => prev + text.charAt(index));
+			index++;
+			if (index >= text.length) clearInterval(interval);
+		}, speed);
+		return () => clearInterval(interval);
+	}, [text, speed]);
+	return typed;
+}
 
 const quoteVariants = {
 	hidden: { opacity: 0, x: 30 },
@@ -81,21 +87,21 @@ const quoteVariants = {
 };
 
 export default function ExperienceTimeline() {
+	const { scrollY } = useViewportScroll();
+	const themeColor = useTransform(
+		scrollY,
+		[0, 300, 700],
+		["#3B82F6", "#8B5CF6", "#10B981"]
+	);
+
 	return (
-		<div
-			style={{
-				position: "relative",
-				padding: "3rem 1rem",
-				maxWidth: 1000,
-				margin: "0 auto",
-				background: "#0d0d0d", // Apple-style black coding vibe
-				borderRadius: "1rem",
-				overflow: "hidden",
-			}}
+		<motion.div
+			className="timeline"
+			style={{ background: "transparent", position: "relative" }}
 		>
-			{/* Timeline Line */}
 			<div
 				aria-hidden="true"
+				className="timelineLine"
 				style={{
 					position: "absolute",
 					top: 0,
@@ -103,7 +109,7 @@ export default function ExperienceTimeline() {
 					transform: "translateX(-50%)",
 					width: 4,
 					height: "100%",
-					background: "linear-gradient(to bottom, #3B82F6, #8B5CF6, #10B981)",
+					background: themeColor,
 					borderRadius: 2,
 					zIndex: 0,
 					boxShadow: "0 0 12px rgba(99, 102, 241, 0.5)",
@@ -115,14 +121,30 @@ export default function ExperienceTimeline() {
 				const Icon = exp.icon;
 				const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 				const quote = philosopherQuotes[i % philosopherQuotes.length];
+				const typedQuote = useTyping(quote);
 
 				return (
 					<motion.article
 						ref={ref}
 						key={i}
-						initial="offscreen"
-						animate={inView ? "onscreen" : "offscreen"}
-						variants={cardVariants}
+						initial={{ opacity: 0, y: 40, rotateY: 0 }}
+						animate={
+							inView
+								? {
+										opacity: 1,
+										y: 0,
+										rotateY: isLeft ? 5 : -5,
+										transition: { type: "spring", bounce: 0.25, duration: 0.5 },
+								  }
+								: { opacity: 0, y: 40, rotateY: 0 }
+						}
+						whileHover={{
+							rotateX: -8,
+							rotateY: isLeft ? 8 : -8,
+							scale: 1.07,
+							transition: { type: "spring", stiffness: 270, damping: 20 },
+						}}
+						whileTap={{ scale: 0.97 }}
 						style={{
 							display: "flex",
 							flexDirection: isLeft ? "row" : "row-reverse",
@@ -133,17 +155,10 @@ export default function ExperienceTimeline() {
 							zIndex: 1,
 							flexWrap: "wrap",
 						}}
-						whileHover={{
-							rotateX: -3,
-							rotateY: isLeft ? 3 : -3,
-							scale: 1.03,
-							transition: { type: "spring", stiffness: 300, damping: 18 },
-						}}
-						whileTap={{ scale: 0.97 }}
 					>
-						{/* Dot */}
 						<div
 							aria-hidden="true"
+							className="timelineDot"
 							style={{
 								position: "absolute",
 								top: "1.5rem",
@@ -159,22 +174,19 @@ export default function ExperienceTimeline() {
 							}}
 						/>
 
-						{/* Card */}
 						<section
 							role="region"
 							tabIndex={0}
+							className="timelineContent"
 							style={{
-								background: "#1b1b1b",
-								borderRadius: "1rem",
+								background: "rgba(13, 13, 13, 0.85)",
+								borderColor: exp.color + "55",
 								padding: "1.5rem 2rem",
-								boxShadow: "0 6px 25px rgba(0,0,0,0.6)",
 								maxWidth: "45%",
-								cursor: "default",
-								userSelect: "none",
-								outline: "none",
-								transition: "all 0.25s ease",
 								flex: "1 1 100%",
 								marginBottom: "1rem",
+								cursor: "default",
+								userSelect: "none",
 							}}
 						>
 							<header
@@ -191,11 +203,11 @@ export default function ExperienceTimeline() {
 										backgroundColor: exp.color + "33",
 										padding: "0.5rem",
 										borderRadius: "0.5rem",
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
 										width: 40,
 										height: 40,
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
 									}}
 								>
 									<Icon size={22} color={exp.color} />
@@ -252,7 +264,6 @@ export default function ExperienceTimeline() {
 							</ul>
 						</section>
 
-						{/* Quote */}
 						<motion.div
 							initial="hidden"
 							animate={inView ? "visible" : "hidden"}
@@ -278,14 +289,15 @@ export default function ExperienceTimeline() {
 								WebkitBackdropFilter: "blur(6px)",
 								flex: "1 1 100%",
 								marginTop: "1rem",
+								whiteSpace: "pre-wrap",
 							}}
 							aria-hidden="true"
 						>
-							{quote}
+							{typedQuote}
 						</motion.div>
 					</motion.article>
 				);
 			})}
-		</div>
+		</motion.div>
 	);
 }

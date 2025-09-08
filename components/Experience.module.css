@@ -6,24 +6,27 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	background: transparent;
+	font-family: "Neue Montreal", "Inter", "Source Sans Pro", -apple-system,
+		BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
 }
 
-/* === VERTICAL LINE === */
-.timeline::before {
+/* === VERTICAL TIMELINE LINE === */
+.timelineLine {
 	cursor: none !important;
 	content: "";
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 50%;
-	width: 3px;
-	background: None;
-	transform: translateX(-50%);
+	width: 4px;
+	border-radius: 2px;
 	z-index: 0;
+	box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
 }
 
-/* === TIMELINE ITEM === */
-.timelineItem {
+/* === TIMELINE ITEM BASE STYLES === */
+.timeline article {
 	cursor: none !important;
 	display: flex;
 	flex-direction: column;
@@ -31,18 +34,20 @@
 	position: relative;
 	margin: 2rem 0;
 	max-width: 600px;
+	transition: transform 0.3s ease;
+	font-family: inherit;
 }
 
-.timelineItem:nth-child(even) {
-	cursor: none !important;
+/* === ALTERNATE LEFT AND RIGHT ALIGNMENTS === */
+.timeline article:nth-child(even) {
 	align-items: flex-end;
 }
 
-/* === DOT === */
+/* === TIMELINE DOT === */
 .timelineDot {
 	cursor: none !important;
 	position: absolute;
-	top: 0.5rem;
+	top: 1.5rem;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 1.2rem;
@@ -53,92 +58,53 @@
 	z-index: 10;
 }
 
-/* === CARD === */
+/* === TIMELINE CARD CONTENT STYLES === */
 .timelineContent {
 	cursor: none !important;
 	position: relative;
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	color: white;
-	padding: 1.5rem;
+	background: rgba(13, 13, 13, 0.85);
 	border-radius: 1rem;
-	width: 90%;
-	max-width: 500px;
-	box-shadow: 0 6px 25px rgba(255, 255, 255, 0.08);
-	margin-top: 2rem;
-	z-index: 5;
+	padding: 1.5rem 2rem;
+	color: white;
+	max-width: 45%;
+	margin-bottom: 1rem;
+	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
 	transition: all 0.3s ease;
-	cursor: default;
+	user-select: none;
+	font-family: inherit;
 }
 
-.timelineContent:hover {
-	cursor: none !important;
-	transform: translateY(-5px) scale(1.02);
-	box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-	border-color: rgba(255, 255, 255, 0.4);
+/* Headings and body text inside cards */
+.timelineContent h4,
+.timelineContent p,
+.timelineContent ul {
+	font-family: "Neue Montreal", "Inter", "Source Sans Pro", sans-serif;
 }
 
-/* === EVEN ITEM ALIGN RIGHT === */
-.timelineItem:nth-child(even) .timelineContent {
-	cursor: none !important;
-	align-self: flex-end;
+/* Text alignment for left/right alternate cards */
+.timeline article:nth-child(even) .timelineContent {
 	text-align: right;
 }
 
-/* === ODD ITEM ALIGN LEFT === */
-.timelineItem:nth-child(odd) .timelineContent {
-	cursor: none !important;
-	align-self: flex-start;
+.timeline article:nth-child(odd) .timelineContent {
 	text-align: left;
 }
 
-/* === MOBILE RESPONSIVE === */
-@media (max-width: 768px) {
-	.timeline::before {
-		left: 12px; /* Shift line to the left a bit */
-		transform: none;
-	}
-
-	.timelineItem,
-	.timelineItem:nth-child(even),
-	.timelineItem:nth-child(odd) {
-		align-items: flex-start !important; /* Force all items left-aligned */
-		max-width: 100%;
-	}
-
-	.timelineDot {
-		left: 12px;
-	}
-
-	.timelineContent {
-		margin-left: 2.5rem;
-		margin-right: 0;
-		width: calc(100% - 3rem);
-		text-align: left !important;
-	}
+/* === QUOTES (philosopher quotes) font  === */
+.timeline article > div:last-child {
+	font-family: "Cinzel", serif;
+	font-style: italic;
+	color: #fff;
 }
 
-/* === SMALLER PHONES === */
-@media (max-width: 400px) {
-	.timelineContent {
-		padding: 1rem 1.2rem;
-		font-size: 0.9rem;
-	}
-
-	.timelineDot {
-		width: 1rem;
-		height: 1rem;
-	}
+.timeline article > div:last-child p {
+	font-family: "Cinzel", serif;
+	font-style: italic;
+	color: #fff;
 }
 
-.timelineItem .timelineContent {
-	cursor: none !important;
-	transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-}
-
-.timelineItem:hover .timelineContent {
+/* === HOVER EFFECTS === */
+.timeline article:hover .timelineContent {
 	transform: translateY(-5px) scale(1.02);
 	box-shadow: 0 0 15px rgba(255, 255, 255, 0.25),
 		0 0 30px rgba(99, 102, 241, 0.3);
@@ -146,6 +112,7 @@
 	animation: pulseGlow 2s infinite ease-in-out;
 }
 
+/* === ANIMATION KEYFRAMES FOR GLOW === */
 @keyframes pulseGlow {
 	0%,
 	100% {
@@ -155,5 +122,45 @@
 	50% {
 		box-shadow: 0 0 25px rgba(255, 255, 255, 0.35),
 			0 0 40px rgba(99, 102, 241, 0.35);
+	}
+}
+
+/* === RESPONSIVE STYLES FOR TABLETS AND SMALLER SCREENS === */
+@media (max-width: 768px) {
+	/* Shift timeline line left and reduce width */
+	.timelineLine {
+		left: 12px !important;
+		transform: none !important;
+		width: 3px !important;
+	}
+
+	/* Stack timeline items vertically, left align all */
+	.timeline article,
+	.timeline article:nth-child(even),
+	.timeline article:nth-child(odd) {
+		align-items: flex-start !important;
+		max-width: 100% !important;
+		flex-direction: row !important;
+	}
+
+	/* Full width cards with margin for dot */
+	.timelineContent {
+		max-width: calc(100% - 3rem) !important;
+		margin-left: 2.5rem !important;
+		margin-right: 0 !important;
+		text-align: left !important;
+	}
+}
+
+/* === RESPONSIVE STYLES FOR SMALL PHONES AND VERY SMALL SCREENS === */
+@media (max-width: 400px) {
+	.timelineContent {
+		padding: 1rem 1.2rem !important;
+		font-size: 0.9rem !important;
+	}
+
+	.timelineDot {
+		width: 1rem !important;
+		height: 1rem !important;
 	}
 }
