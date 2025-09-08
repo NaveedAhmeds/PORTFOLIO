@@ -1,0 +1,182 @@
+.testimonialCard {
+	max-width: 720px;
+	width: 90%;
+	margin: 0 auto;
+	padding: 2rem;
+	backdrop-filter: blur(15px);
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 1rem;
+	border: 1.5px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+	color: white;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	transform-style: preserve-3d;
+	will-change: transform, box-shadow;
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.testimonialCardHeader {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 1.5rem;
+}
+
+.testimonialCardHeaderLeft {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex: 1 1 300px;
+	min-width: 280px;
+}
+
+.avatar {
+	width: 56px;
+	height: 56px;
+	background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+	border-radius: 0.75rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	font-size: 1.5rem;
+	color: white;
+	user-select: none;
+	flex-shrink: 0;
+}
+
+.testimonialCardRole {
+	font-family: "Cinzel", serif;
+	font-weight: 700;
+	font-size: 1.75rem;
+	margin: 0;
+}
+
+.testimonialCardCompany {
+	color: #60a5fa;
+	font-weight: 600;
+	margin-top: 0.25rem;
+	font-family: "Neue Montreal", sans-serif;
+	font-size: 1rem;
+}
+
+.testimonialCardBadge {
+	background-color: #d1fae5;
+	color: #065f46;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	user-select: none;
+	flex-shrink: 0;
+	margin-top: 0.5rem;
+}
+
+.testimonialCardAchievements {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.testimonialCardAchievement {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+.testimonialCardIconWrapper {
+	background-color: #bfdbfe;
+	border-radius: 9999px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.testimonialCardAchievementTitle {
+	margin: 0;
+	font-weight: 700;
+	color: white;
+	font-family: "Neue Montreal", sans-serif;
+	font-size: 1.1rem;
+}
+
+.testimonialCardAchievementDesc {
+	color: rgba(255, 255, 255, 0.8);
+	margin-top: 0.25rem;
+	font-family: "Neue Montreal", sans-serif;
+	line-height: 1.4;
+	font-size: 0.95rem;
+}
+
+.testimonialCardTech {
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	font-family: "Neue Montreal", sans-serif;
+	font-size: 0.9rem;
+}
+
+.testimonialCardTechTag {
+	padding: 0.3rem 0.8rem;
+	background: rgba(59, 130, 246, 0.1);
+	color: #3b82f6;
+	border-radius: 9999px;
+	font-weight: 600;
+	user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.testimonialCard {
+		width: 95%;
+		padding: 1.5rem 1.5rem;
+	}
+
+	.testimonialCardRole {
+		font-size: 1.4rem;
+	}
+
+	.testimonialCardCompany {
+		font-size: 0.9rem;
+	}
+
+	.testimonialCardAchievementTitle {
+		font-size: 1rem;
+	}
+
+	.testimonialCardAchievementDesc {
+		font-size: 0.85rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.testimonialCard {
+		padding: 1rem 1rem;
+	}
+
+	.testimonialCardRole {
+		font-size: 1.2rem;
+	}
+
+	.testimonialCardCompany {
+		font-size: 0.8rem;
+	}
+
+	.testimonialCardAchievementTitle {
+		font-size: 0.9rem;
+	}
+
+	.testimonialCardAchievementDesc {
+		font-size: 0.8rem;
+	}
+}

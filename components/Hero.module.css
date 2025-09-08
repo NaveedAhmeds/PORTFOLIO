@@ -61,12 +61,12 @@
 }
 
 .rightText {
-	font-family: "Fira Code", "Source Code Pro", monospace;
-	font-weight: 700;
+	/* font-family: "Fira Code", "Source Code Pro", monospace; */
+	font-weight: 550;
 	font-size: 1.9rem;
 	line-height: 1.3;
 	color: #eee;
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.6rem;
 }
 
 /* Contact button styled with code font as well */

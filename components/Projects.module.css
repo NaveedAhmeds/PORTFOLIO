@@ -1,10 +1,10 @@
 .projectsSection {
-	cursor: None !important;
+	cursor: none !important;
 	position: relative;
 	padding: 5rem 2rem;
 	font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-	min-height: 100vh;
+	min-height: 120vh; /* Increased height for better spacing */
 	overflow: hidden;
 	background-color: #0a0a0a; /* Apple black */
 	color: #fff;
@@ -12,7 +12,7 @@
 
 /* Animated coding vibe background */
 .animatedBg {
-	cursor: None !important;
+	cursor: none !important;
 	position: absolute;
 	inset: 0;
 	background-image: repeating-linear-gradient(
@@ -31,6 +31,7 @@
 		);
 	z-index: -1;
 	animation: moveCodeBg 10s linear infinite;
+	transition: background-position 0.7s ease;
 }
 
 @keyframes moveCodeBg {
@@ -44,7 +45,7 @@
 
 /* Quote + Title */
 .philosophyQuote {
-	cursor: None !important;
+	cursor: none !important;
 	text-align: center;
 	color: #fff;
 	font-size: 1.2rem;
@@ -68,14 +69,21 @@
 
 /* Cards */
 .projectCard {
-	cursor: None !important;
+	cursor: none !important;
 	background: #1b1b1b; /* dark card to pop */
 	border-radius: 1rem;
 	padding: 2rem;
-	min-height: 480px; /* bigger laptop ratio */
-	transition: transform 0.12s ease-in-out, box-shadow 0.12s ease-in-out;
-	cursor: pointer;
+	min-height: 560px; /* increased min-height */
+	transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
 	box-shadow: 0 5px 20px rgba(255, 255, 255, 0.03);
+	cursor: pointer;
+}
+
+.projectCard:hover {
+	box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12),
+		0 0 15px rgba(0, 205, 255, 0.3);
+	transform: translateY(-6px) scale(1.05);
+	transition-timing-function: ease-out;
 }
 
 .projectImage {
@@ -125,7 +133,9 @@
 	width: 90%;
 	color: #fff;
 	position: relative;
-	box-shadow: 0 20px 60px rgba(255, 255, 255, 0.05);
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 10px 15px rgba(0, 205, 255, 0.4);
+	backdrop-filter: blur(12px);
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .closeButton {
@@ -134,9 +144,18 @@
 	right: 14px;
 	background: none;
 	border: none;
-	font-size: 1.5rem;
+	font-size: 1.8rem;
+	padding: 6px 12px;
+	border-radius: 50%;
 	color: #fff;
 	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+	background-color: rgba(255, 255, 255, 0.1);
+	outline: none;
 }
 
 .modalTitle {
@@ -180,7 +199,7 @@
 	border-radius: 0.5rem;
 	text-decoration: none;
 	color: #0a0a0a;
-	background: #fff; /* high contrast button */
+	background: #fff;
 	font-weight: 600;
 	transition: all 0.2s ease-in-out;
 }
@@ -188,6 +207,21 @@
 .githubLink:hover {
 	background: #333;
 	color: #fff;
+}
+
+/* === CLICK TO DEMO LABEL === */
+.clickDemoLabel {
+	position: absolute;
+	bottom: 1.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #0ff; /* bright cyan */
+	font-family: "Fira Code", "Source Code Pro", monospace;
+	user-select: none;
+	pointer-events: none;
+	white-space: nowrap;
 }
 
 /* Responsive */

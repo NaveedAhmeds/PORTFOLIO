@@ -134,21 +134,45 @@
 		width: 3px !important;
 	}
 
-	/* Stack timeline items vertically, left align all */
+	/* Stack timeline items vertically with centered, wider cards */
 	.timeline article,
 	.timeline article:nth-child(even),
 	.timeline article:nth-child(odd) {
-		align-items: flex-start !important;
-		max-width: 100% !important;
-		flex-direction: row !important;
+		align-items: center !important; /* center align all */
+		max-width: 90% !important; /* wider cards */
+		flex-direction: column !important; /* stack vertically */
+		margin-left: auto !important;
+		margin-right: auto !important;
 	}
 
-	/* Full width cards with margin for dot */
+	/* Cards take full available width with padding */
 	.timelineContent {
-		max-width: calc(100% - 3rem) !important;
-		margin-left: 2.5rem !important;
+		max-width: 100% !important;
+		margin-left: 0 !important;
 		margin-right: 0 !important;
-		text-align: left !important;
+		text-align: center !important;
+		padding: 2rem !important;
+		flex: none !important;
+	}
+
+	/* Timeline dot moves above card instead of the side */
+	.timelineDot {
+		position: relative !important;
+		top: 0 !important;
+		left: auto !important;
+		transform: none !important;
+		margin-bottom: 1rem;
+	}
+
+	/* Philosopher quotes centered below cards */
+	.timeline > article > div:last-child {
+		max-width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		margin-top: 1rem !important;
+		padding: 1rem !important;
+		font-size: 1rem !important;
+		text-align: center !important;
 	}
 }
 
@@ -162,5 +186,23 @@
 	.timelineDot {
 		width: 1rem !important;
 		height: 1rem !important;
+	}
+}
+
+/* Adjusted diagonal mask and filter for tablets and smaller */
+@media (max-width: 768px) {
+	.bgDiagonal {
+		clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+		filter: brightness(0.75) blur(1px) saturate(1.1);
+		transition: all 0.3s ease;
+	}
+}
+
+/* Further softened diagonal and lighter blur for very small phones */
+@media (max-width: 480px) {
+	.bgDiagonal {
+		clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
+		filter: brightness(0.85) blur(0.8px) saturate(1.05);
+		transition: all 0.3s ease;
 	}
 }

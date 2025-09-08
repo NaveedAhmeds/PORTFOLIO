@@ -5,6 +5,7 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Experience from "@/components/Experience";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
+import TestimonialCard from "@/components/TestimonialCard";
 
 //test run to be initialized...
 

@@ -20,7 +20,7 @@ const projects = [
 			"Seamless PDF-DOCX conversion, Python/Tkinter desktop utility.",
 		about:
 			"A desktop app that converts PDFs to DOCX and vice versa for document-heavy workflows. Built with Python and Tkinter, focusing on clean UI and reliable performance.",
-		image: "/Images/1.png",
+		image: "/Images/dave.jpg",
 		video: "https://www.youtube.com/embed/hCChO2X6vrk?autoplay=1",
 		link: "https://github.com/NaveedAhmeds/DAVE",
 	},
@@ -29,8 +29,9 @@ const projects = [
 		description: "Personal history and journaling web application.",
 		about:
 			"A full-stack web app for journaling and historical note tracking. Responsive, sleek UI, and uses a modern database backend.",
-		image: "/Images/historian.png",
-		video: "",
+		image: "/Images/Historian.jpg",
+		video:
+			"https://www.youtube.com/embed/6b-zPEc0Ob8?si=Zd0tcCq2aD_Ew5tp&autoplay=1",
 		link: "https://github.com/NaveedAhmeds/Historian",
 	},
 	{
@@ -38,7 +39,7 @@ const projects = [
 		description: "Python automation for secure Matrix account login.",
 		about:
 			"Automates the login process for Matrix accounts using Python scripts with error handling and secure credential management.",
-		image: "/Images/matrix.png",
+		image: "/Images/matrix.jpg",
 		video: "",
 		link: "https://github.com/NaveedAhmeds/matrixAutoLogin",
 	},
@@ -139,6 +140,8 @@ export default function Projects() {
 							<p className={styles.cardDesc}>{project.description}</p>
 							<p className={styles.cardAbout}>{project.about}</p>
 						</div>
+
+						<div className={styles.clickDemoLabel}>Click to see demo</div>
 					</motion.div>
 				))}
 			</div>
