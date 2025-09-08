@@ -8,7 +8,7 @@ export default function Experience() {
 	useEffect(() => {
 		const onScroll = () => {
 			const scrollTop = window.scrollY;
-			setBgOpaque(scrollTop >= 400);
+			setBgOpaque(scrollTop >= 600);
 		};
 
 		window.addEventListener("scroll", onScroll);
