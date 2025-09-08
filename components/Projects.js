@@ -21,7 +21,7 @@ const projects = [
 		about:
 			"A desktop app that converts PDFs to DOCX and vice versa for document-heavy workflows. Built with Python and Tkinter, focusing on clean UI and reliable performance.",
 		image: "/Images/dave.jpg",
-		video: "https://www.youtube.com/embed/hCChO2X6vrk?autoplay=1",
+		video: "https://www.youtube.com/embed/hCChO2X6vrk?autoplay=1&mute=1&loop=1",
 		link: "https://github.com/NaveedAhmeds/DAVE",
 	},
 	{
@@ -31,7 +31,7 @@ const projects = [
 			"A full-stack web app for journaling and historical note tracking. Responsive, sleek UI, and uses a modern database backend.",
 		image: "/Images/Historian.jpg",
 		video:
-			"https://www.youtube.com/embed/6b-zPEc0Ob8?si=Zd0tcCq2aD_Ew5tp&autoplay=1",
+			"https://www.youtube.com/embed/6b-zPEc0Ob8?si=Zd0tcCq2aD_Ew5tp&autoplay=1&mute=1&loop=1",
 		link: "https://github.com/NaveedAhmeds/Historian",
 	},
 	{
@@ -194,7 +194,7 @@ export default function Projects() {
 									rel="noopener noreferrer"
 									className={styles.githubLink}
 								>
-									View on GitHub
+									View Code on GitHub
 								</a>
 							</div>
 						</motion.div>
