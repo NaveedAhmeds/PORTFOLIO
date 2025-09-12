@@ -1,15 +1,19 @@
+/* ===== Projects Section ===== */
 .projectsSection {
 	position: relative;
 	padding: 5rem 2rem;
 	font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 	min-height: 120vh;
-	background: rgba(255, 255, 255, 0.03);
-	backdrop-filter: blur(8px);
-	border-radius: 1.5rem;
 	color: #fff;
 }
 
+/* Remove old background */
+.animatedBg {
+	display: none;
+}
+
+/* Quote + Title */
 .philosophyQuote {
 	text-align: center;
 	color: #f5f5f5;
@@ -25,12 +29,14 @@
 	color: #fff;
 }
 
+/* ===== Projects Grid ===== */
 .projectsGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 	gap: 2.5rem;
 }
 
+/* ===== Project Card ===== */
 .projectCard {
 	cursor: none !important;
 	background: rgba(255, 255, 255, 0.05);
@@ -41,8 +47,16 @@
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 	color: #fff;
 	position: relative;
+	opacity: 0;
+	transform: translateY(30px);
+	transition: transform 0.15s ease-out, opacity 0.3s ease-out;
+	will-change: transform;
 	cursor: pointer;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.projectCard.in-view {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 .projectCard:hover {
@@ -78,16 +92,15 @@
 	line-height: 1.5;
 }
 
-/* Modal */
+/* ===== Modal Window ===== */
 .modalBackdrop {
 	position: fixed;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.85);
-	backdrop-filter: blur(10px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 999;
+	z-index: 1000;
 }
 
 .modalContent {
@@ -97,13 +110,15 @@
 	padding: 2.5rem;
 	max-width: 700px;
 	width: 90%;
-	color: #fff;
-	text-align: center;
+	max-height: 85vh;
 	overflow-y: auto;
-	max-height: 90vh;
+	color: #fff;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+	text-align: center;
 	position: relative;
 }
 
+/* Close button */
 .closeButton {
 	position: absolute;
 	top: 16px;
@@ -122,11 +137,23 @@
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Modal text/video */
+.modalTitle {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.modalDesc {
+	margin-bottom: 1.5rem;
+	color: #f0f0f0;
+	line-height: 1.5;
+}
+
 .videoWrapper,
 .videoWrapperPlaceholder {
 	width: 100%;
 	height: 320px;
-	margin: 1.5rem 0;
+	margin-bottom: 1.5rem;
 	border-radius: 0.6rem;
 	overflow: hidden;
 	background: rgba(255, 255, 255, 0.05);
@@ -143,6 +170,7 @@
 	border: none;
 }
 
+/* Modal buttons */
 .modalButtonContainer {
 	display: flex;
 	justify-content: center;
@@ -165,6 +193,7 @@
 	color: #fff;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 1024px) {
 	.projectsGrid {
 		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -191,31 +220,17 @@
 	.videoWrapperPlaceholder {
 		height: 220px;
 	}
-}
-/* Modal improvements for small screens */
-@media (max-width: 480px) {
 	.modalContent {
-		width: 95%; /* almost full width but with a little margin */
+		width: 95%;
 		padding: 1.5rem;
-		max-height: 85vh; /* let it scroll if content too tall */
-		border-radius: 1rem;
-		overflow-y: auto; /* scroll inside modal if needed */
+		max-height: 85vh;
 	}
-
-	.videoWrapper,
-	.videoWrapperPlaceholder {
-		height: 180px; /* shrink video for phones */
-	}
-
 	.modalTitle {
 		font-size: 1.5rem;
 	}
-
 	.modalDesc {
 		font-size: 0.95rem;
-		line-height: 1.4;
 	}
-
 	.githubLink {
 		font-size: 0.9rem;
 		padding: 0.5rem 1.2rem;
