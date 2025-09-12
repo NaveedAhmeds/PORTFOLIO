@@ -81,7 +81,7 @@
 
 	/* Flicker fix */
 	will-change: transform, opacity;
-	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
 	opacity: 0; /* start invisible for scroll animation */
 	transform: translateY(30px);
 }
@@ -135,6 +135,9 @@
 	align-items: center;
 	z-index: 100;
 	backdrop-filter: blur(8px);
+	padding: 1rem; /* ensures modal doesn’t touch edges */
+	box-sizing: border-box;
+	overflow-y: auto; /* scroll if content too tall */
 }
 
 .modalContent {
@@ -143,11 +146,12 @@
 	border-radius: 1rem;
 	padding: 2.5rem;
 	max-width: 700px;
-	width: 90%;
+	width: 100%; /* responsive */
 	color: #fff;
 	position: relative;
 	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
 	transition: opacity 0.3s ease, transform 0.3s ease;
+	margin: auto; /* perfect centering */
 }
 
 .closeButton {
@@ -249,5 +253,28 @@
 	}
 	.projectCard {
 		min-height: 380px;
+	}
+}
+/* Modal mobile adjustments */
+@media (max-width: 768px) {
+	.modalContent {
+		max-width: 90%;
+		width: 100%;
+		padding: 2rem;
+		margin: 1rem auto; /* small spacing from top/bottom */
+		border-radius: 1rem;
+	}
+
+	.videoWrapper,
+	.videoWrapperPlaceholder {
+		height: 220px; /* smaller video for phones */
+	}
+
+	.modalDesc {
+		font-size: 0.95rem;
+	}
+
+	.modalTitle {
+		font-size: 1.6rem;
 	}
 }

@@ -5,10 +5,13 @@
 	padding: 2rem 1rem;
 	max-width: 1200px;
 	margin: 0 auto;
-	background: transparent;
+	background: rgba(255, 255, 255, 0.03); /* glass background */
+	backdrop-filter: blur(12px); /* frosted effect */
+	border-radius: 1.2rem;
 	font-family: "Neue Montreal", "Inter", "Source Sans Pro", -apple-system,
 		BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
 		"Open Sans", "Helvetica Neue", sans-serif;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
 /* === VERTICAL TIMELINE LINE === */
@@ -34,7 +37,7 @@
 	position: relative;
 	margin: 2rem 0;
 	max-width: 600px;
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 	font-family: inherit;
 }
 
@@ -62,10 +65,11 @@
 .timelineContent {
 	cursor: none !important;
 	position: relative;
-	background: rgba(13, 13, 13, 0.85);
+	background: rgba(255, 255, 255, 0.05); /* glassy frosted card */
+	backdrop-filter: blur(15px);
 	border-radius: 1rem;
 	padding: 1.5rem 2rem;
-	color: white;
+	color: #f0f0f0;
 	max-width: 45%;
 	margin-bottom: 1rem;
 	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
@@ -79,6 +83,7 @@
 .timelineContent p,
 .timelineContent ul {
 	font-family: "Neue Montreal", "Inter", "Source Sans Pro", sans-serif;
+	color: #f5f5f5; /* brighter text for readability */
 }
 
 /* Text alignment for left/right alternate cards */
@@ -106,8 +111,8 @@
 /* === HOVER EFFECTS === */
 .timeline article:hover .timelineContent {
 	transform: translateY(-5px) scale(1.02);
-	box-shadow: 0 0 15px rgba(255, 255, 255, 0.25),
-		0 0 30px rgba(99, 102, 241, 0.3);
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.25),
+		0 0 35px rgba(99, 102, 241, 0.3);
 	border-color: rgba(255, 255, 255, 0.4);
 	animation: pulseGlow 2s infinite ease-in-out;
 }
@@ -127,25 +132,22 @@
 
 /* === RESPONSIVE STYLES FOR TABLETS AND SMALLER SCREENS === */
 @media (max-width: 768px) {
-	/* Shift timeline line left and reduce width */
 	.timelineLine {
 		left: 12px !important;
 		transform: none !important;
 		width: 3px !important;
 	}
 
-	/* Stack timeline items vertically with centered, wider cards */
 	.timeline article,
 	.timeline article:nth-child(even),
 	.timeline article:nth-child(odd) {
-		align-items: center !important; /* center align all */
-		max-width: 90% !important; /* wider cards */
-		flex-direction: column !important; /* stack vertically */
+		align-items: center !important;
+		max-width: 90% !important;
+		flex-direction: column !important;
 		margin-left: auto !important;
 		margin-right: auto !important;
 	}
 
-	/* Cards take full available width with padding */
 	.timelineContent {
 		max-width: 100% !important;
 		margin-left: 0 !important;
@@ -155,7 +157,6 @@
 		flex: none !important;
 	}
 
-	/* Timeline dot moves above card instead of the side */
 	.timelineDot {
 		position: relative !important;
 		top: 0 !important;
@@ -164,7 +165,6 @@
 		margin-bottom: 1rem;
 	}
 
-	/* Philosopher quotes centered below cards */
 	.timeline > article > div:last-child {
 		max-width: 100% !important;
 		margin-left: 0 !important;
