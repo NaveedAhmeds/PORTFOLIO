@@ -1,36 +1,94 @@
 .contactSection {
-	margin-top: 5rem;
-	padding: 2.5rem 0.5rem;
-	/* Transparent background for section */
-	background: transparent;
+	position: relative;
+	margin-top: 0rem;
+	padding: 10rem 1.5rem;
 	text-align: center;
+	color: #f5f5f5;
+	font-family: "Inter", sans-serif;
+	overflow: hidden; /* ensures pseudo-element stays behind */
+}
+
+.contactSection::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(255, 255, 255, 0.05); /* slight transparent overlay */
+	backdrop-filter: blur(3px); /* main blur for the background */
+	z-index: -1; /* keep behind content */
+	border-radius: 0; /* full section blur */
 }
 
 .heading {
 	font-size: 2rem;
 	margin-bottom: 2rem;
 	letter-spacing: 1px;
+	color: #fff; /* bright white for contrast over painting */
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
 }
 
 .bgGlass {
-	background: rgba(255, 255, 255, 0.15); /* Subtle frosted glass */
-	backdrop-filter: blur(10px);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.09), 0 1.5px 4px rgba(0, 0, 0, 0.05);
-	border-radius: 1.25rem;
-	padding: 2.5rem 2rem;
+	position: relative;
+	overflow: hidden;
+	/* existing styles */
+	background: rgba(255, 255, 255, 0.12);
+	backdrop-filter: blur(14px);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+	border-radius: 1.5rem;
+	padding: 3rem 2rem;
 	max-width: 520px;
 	margin: 0 auto;
-	transition: background 0.4s cubic-bezier(0.4, 2, 0.6, 1),
-		box-shadow 0.3s cubic-bezier(0.4, 2, 0.6, 1);
+	transition: all 0.4s cubic-bezier(0.4, 2, 0.6, 1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	z-index: 0;
+}
+
+/* Animated gradient overlay */
+.bgGlass::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		120deg,
+		rgba(0, 0, 0, 0.2),
+		rgba(24, 24, 24, 0),
+		rgba(0, 0, 0, 0)
+	);
+	background-size: 400% 400%;
+	border-radius: inherit;
+	animation: gradientShift 15s ease infinite;
+	z-index: -1; /* behind content */
+}
+
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .icon {
 	font-size: 2.1rem;
 	margin-bottom: 1.2rem;
+	color: #d7dfe0; /* neon-ish glow */
+	text-shadow: 0 0 12px #00e0ff, 0 0 24px #00e0ff80;
+	animation: bounce 1.2s infinite alternate;
+}
+
+@keyframes bounce {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-6px);
+	}
 }
 
 .contactFormContainer {
-	/* For fade-in effect */
 	animation: fadeIn 1.2s cubic-bezier(0.4, 2, 0.6, 1);
 }
 
@@ -52,31 +110,54 @@
 	width: 100%;
 }
 
-.label {
-	font-weight: 500;
-	margin-bottom: 0.3rem;
-	text-align: left;
-	color: #222;
-	letter-spacing: 0.02em;
+.inputGroup {
+	position: relative;
 }
 
 .input,
 .textarea {
+	width: 100%;
 	padding: 1rem;
-	border: 1px solid #e3e3e3;
+	border: 1px solid rgba(255, 255, 255, 0.25);
 	border-radius: 10px;
+	background: rgba(0, 0, 0, 0.25); /* dark overlay for readability */
+	color: #fff;
 	font-size: 1.1rem;
-	background: rgba(255, 255, 255, 0.7);
 	font-family: inherit;
-	color: #111;
-	transition: border 0.2s, box-shadow 0.2s;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(6px);
 }
 
 .input:focus,
 .textarea:focus {
 	outline: none;
-	border-color: #0070f3;
-	box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.11);
+	border-color: #00e0ff;
+	box-shadow: 0 0 20px rgba(0, 224, 255, 0.45);
+	transform: scale(1.01);
+}
+
+.floatingLabel {
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #ddd;
+	pointer-events: none;
+	transition: all 0.2s ease-out;
+	background: transparent;
+	padding: 0 0.25rem;
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.input:focus + .floatingLabel,
+.textarea:focus + .floatingLabel,
+.input:not(:placeholder-shown) + .floatingLabel,
+.textarea:not(:placeholder-shown) + .floatingLabel {
+	top: -0.5rem;
+	font-size: 0.85rem;
+	color: #00e0ff;
+	background: rgba(0, 0, 0, 0.3);
+	text-shadow: 0 0 10px #00e0ff55;
 }
 
 .textarea {
@@ -85,47 +166,95 @@
 }
 
 .button {
-	background: linear-gradient(90deg, #0070f3 55%, #00c5fb 100%);
+	background: linear-gradient(90deg, #000000 0%, #090909 100%);
 	color: #fff;
 	padding: 1rem;
 	border: none;
 	border-radius: 9999px;
 	cursor: pointer;
 	font-weight: bold;
-	transition: background 0.2s, transform 0.2s;
+	transition: all 0.25s ease;
 	font-size: 1.1rem;
-	box-shadow: 0 6px 18px rgba(0, 112, 243, 0.07);
+	box-shadow: 0 6px 18px rgba(225, 225, 225, 0.2);
 }
 
 .button:hover,
 .button:focus {
-	background: linear-gradient(90deg, #005bb5 55%, #00b0e0 100%);
 	transform: translateY(-2px) scale(1.035);
+	background: linear-gradient(90deg, #485258 0%, #4986c3 100%);
+	box-shadow: 0 8px 22px rgba(225, 228, 228, 0.35);
+}
+
+.button:active {
+	transform: translateY(1px) scale(0.98);
+	box-shadow: 0 4px 12px rgba(225, 229, 229, 0.15);
 }
 
 .successMessage {
 	margin-top: 1.2rem;
 	padding: 0.85rem 1rem;
-	background: rgba(0, 128, 0, 0.08);
-	color: #229d46;
+	background: rgba(0, 255, 128, 0.15);
+	color: #bfded0;
 	border-radius: 0.7rem;
 	font-weight: 500;
+	text-shadow: 0 0 6px rgba(0, 255, 128, 0.3);
 	animation: fadeIn 0.8s;
 }
 
-/* Enhance visibility on glass for dark backgrounds */
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
 	.bgGlass {
-		background: rgba(20, 20, 35, 0.23);
-		color: #e6e6e6;
+		background: rgba(10, 10, 20, 0.25);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
 	}
 	.input,
 	.textarea {
-		background: rgba(27, 27, 53, 0.6);
-		color: #f2f2f2;
-		border-color: #444861;
+		background: rgba(0, 0, 0, 0.35);
+		color: #fff;
+		border-color: rgba(255, 255, 255, 0.25);
 	}
-	.label {
-		color: #fafaff;
+	.floatingLabel {
+		color: #ccc;
+	}
+	.button {
+		box-shadow: 0 6px 18px rgba(0, 224, 255, 0.35);
+	}
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+	.bgGlass {
+		width: 90%;
+		padding: 2rem 1rem;
+	}
+	.heading {
+		font-size: 1.75rem;
+	}
+	.input,
+	.textarea {
+		font-size: 1rem;
+		padding: 0.9rem;
+	}
+	.button {
+		font-size: 1rem;
+		padding: 0.9rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.heading {
+		font-size: 1.5rem;
+	}
+	.icon {
+		font-size: 1.8rem;
+		margin-bottom: 1rem;
+	}
+	.input,
+	.textarea {
+		padding: 0.8rem;
+	}
+	.button {
+		padding: 0.8rem;
 	}
 }
