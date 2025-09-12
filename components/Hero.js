@@ -1,94 +1,66 @@
 import styles from "./Hero.module.css";
-import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Hero() {
-	const heroRef = useRef(null);
+	// Parallax scroll effect
+	const { scrollY } = useScroll();
+	const bgY = useTransform(scrollY, [0, 500], ["0%", "10%"]);
 
-	const { scrollYProgress } = useScroll({
-		target: heroRef,
-		offset: ["start start", "end start"],
-	});
-	const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 0.9]);
-	const bgOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.7, 0.4]);
-
-	const controls = useAnimation();
-	useEffect(() => {
-		controls.start("visible");
-	}, [controls]);
+	// Scroll to Contact Section
+	const scrollToContact = () => {
+		const contactSection = document.getElementById("contact");
+		if (contactSection) {
+			contactSection.scrollIntoView({ behavior: "smooth" });
+		}
+	};
 
 	return (
-		<section className={styles.hero} ref={heroRef}>
+		<section className={styles.hero}>
+			{/* Background */}
 			<motion.div
 				className={styles.bgDiagonal}
-				style={{
-					scale: bgScale,
-					opacity: bgOpacity,
-					backgroundImage: `url('/hercules-bg-zoom.jpg')`,
-				}}
-				initial={{ scale: 1.25, opacity: 0 }}
-				animate={{ scale: 1.1, opacity: 1 }}
-				transition={{ duration: 0.8, ease: "easeOut" }}
+				style={{ y: bgY }}
+				initial={{ scale: 1.05 }}
+				animate={{ scale: 1.0 }}
+				transition={{ duration: 0.5, ease: "easeOut" }}
 			/>
 
+			{/* Left Text */}
 			<motion.div
 				className={styles.left}
-				variants={{
-					hidden: { opacity: 0, x: -80 },
-					visible: {
-						opacity: 1,
-						x: 0,
-						transition: { delay: 0.3, duration: 0.7 },
-					},
-				}}
-				initial="hidden"
-				animate={controls}
+				initial={{ opacity: 0, x: -50 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.35 }}
 			>
 				<h1 className={styles.headline}>
 					DESIGNER <br />&<br /> DEVELOPER
 				</h1>
 				<motion.p
 					className={styles.subtitle}
-					initial={{ opacity: 0, y: 40 }}
+					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.8, duration: 0.5 }}
+					transition={{ duration: 0.35, delay: 0.1 }}
 				>
 					Crafting code & visuals with renaissance precision.
 				</motion.p>
 			</motion.div>
 
+			{/* Right Text */}
 			<motion.div
 				className={styles.right}
-				variants={{
-					hidden: { opacity: 0, x: 40 },
-					visible: {
-						opacity: 1,
-						x: 0,
-						transition: { delay: 1.0, duration: 0.7 },
-					},
-				}}
-				initial="hidden"
-				animate={controls}
+				initial={{ opacity: 0, x: 40 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.35, delay: 0.2 }}
 			>
-				<motion.p
-					className={styles.rightText}
-					initial={{ opacity: 0, y: 60 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 1.2, duration: 0.6 }}
-				>
+				<p className={styles.rightText}>
 					I AM A DEVELOPER AND UX/UI DESIGNER CURRENTLY STUDYING AT SENECA. I
 					LOVE NATURE, PROGRAMMING, PIZZA, AND ART.
-				</motion.p>
+				</p>
 				<motion.button
 					className={styles.contactButton}
-					initial={{ opacity: 0, scale: 0.7 }}
-					animate={{ opacity: 1, scale: 1 }}
-					transition={{
-						delay: 1.5,
-						type: "spring",
-						stiffness: 100,
-						damping: 10,
-					}}
+					whileHover={{ scale: 1.15 }}
+					transition={{ type: "spring", stiffness: 120, damping: 12 }}
+					onClick={scrollToContact}
 				>
 					Contact Me
 				</motion.button>

@@ -1,37 +1,39 @@
 .projectsSection {
-	cursor: none !important;
 	position: relative;
 	padding: 5rem 2rem;
 	font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-	min-height: 120vh; /* Increased height for better spacing */
+	min-height: 120vh;
 	overflow: hidden;
-	background-color: #0a0a0a; /* Apple black */
+	background: rgba(255, 255, 255, 0.03); /* semi-transparent glass */
+	backdrop-filter: blur(12px); /* frosted effect */
+	border-radius: 1.5rem;
 	color: #fff;
+	box-shadow: 0 10px 50px rgba(0, 0, 0, 0.25);
 }
 
 /* Animated coding vibe background */
 .animatedBg {
-	cursor: none !important;
 	position: absolute;
 	inset: 0;
 	background-image: repeating-linear-gradient(
 			0deg,
-			rgba(255, 255, 255, 0.02) 0,
-			rgba(255, 255, 255, 0.02) 1px,
+			rgba(255, 255, 255, 0.01) 0,
+			rgba(255, 255, 255, 0.01) 1px,
 			transparent 1px,
 			transparent 2px
 		),
 		repeating-linear-gradient(
 			90deg,
-			rgba(255, 255, 255, 0.02) 0,
-			rgba(255, 255, 255, 0.02) 1px,
+			rgba(255, 255, 255, 0.01) 0,
+			rgba(255, 255, 255, 0.01) 1px,
 			transparent 1px,
 			transparent 2px
 		);
 	z-index: -1;
-	animation: moveCodeBg 10s linear infinite;
-	transition: background-position 0.7s ease;
+	animation: moveCodeBg 15s linear infinite;
+	backdrop-filter: blur(10px);
+	border-radius: 1.5rem;
 }
 
 @keyframes moveCodeBg {
@@ -39,15 +41,14 @@
 		background-position: 0 0, 0 0;
 	}
 	100% {
-		background-position: 250px 250px, -250px -250px;
+		background-position: 300px 300px, -300px -300px;
 	}
 }
 
 /* Quote + Title */
 .philosophyQuote {
-	cursor: none !important;
 	text-align: center;
-	color: #fff;
+	color: #f5f5f5;
 	font-size: 1.2rem;
 	margin-bottom: 1rem;
 }
@@ -69,21 +70,32 @@
 
 /* Cards */
 .projectCard {
-	cursor: none !important;
-	background: #1b1b1b; /* dark card to pop */
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(12px);
 	border-radius: 1rem;
 	padding: 2rem;
-	min-height: 560px; /* increased min-height */
-	transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
-	box-shadow: 0 5px 20px rgba(255, 255, 255, 0.03);
-	cursor: pointer;
+	min-height: 560px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+	color: #fff;
+	position: relative;
+
+	/* Flicker fix */
+	will-change: transform, opacity;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	opacity: 0; /* start invisible for scroll animation */
+	transform: translateY(30px);
+}
+
+.projectCard.in-view {
+	opacity: 1;
+	transform: translateY(0);
+	transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .projectCard:hover {
-	box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12),
-		0 0 15px rgba(0, 205, 255, 0.3);
-	transform: translateY(-6px) scale(1.05);
-	transition-timing-function: ease-out;
+	transform: translateY(-6px) scale(1.03);
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+	background: rgba(255, 255, 255, 0.06); /* subtle hover */
 }
 
 .projectImage {
@@ -102,13 +114,13 @@
 }
 
 .cardDesc {
-	color: #ccc;
+	color: #ddd;
 	font-size: 1.05rem;
 	margin-bottom: 0.5rem;
 }
 
 .cardAbout {
-	color: #aaa;
+	color: #ccc;
 	font-size: 1rem;
 	line-height: 1.5;
 }
@@ -117,24 +129,24 @@
 .modalBackdrop {
 	position: fixed;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.85);
+	background: rgba(0, 0, 0, 0.75);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	z-index: 100;
-	backdrop-filter: blur(6px);
+	backdrop-filter: blur(8px);
 }
 
 .modalContent {
-	background: #121212;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(15px);
 	border-radius: 1rem;
 	padding: 2.5rem;
 	max-width: 700px;
 	width: 90%;
 	color: #fff;
 	position: relative;
-	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 10px 15px rgba(0, 205, 255, 0.4);
-	backdrop-filter: blur(12px);
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
 	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -165,7 +177,7 @@
 
 .modalDesc {
 	margin-bottom: 1.5rem;
-	color: #ddd;
+	color: #f0f0f0;
 }
 
 .videoWrapper,
@@ -175,10 +187,12 @@
 	margin-bottom: 1.5rem;
 	border-radius: 0.6rem;
 	overflow: hidden;
-	background: #1a1a1a;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(12px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: #ccc;
 }
 
 .videoWrapper iframe {
@@ -187,7 +201,6 @@
 	border: none;
 }
 
-/* Center Button */
 .modalButtonContainer {
 	display: flex;
 	justify-content: center;
@@ -209,19 +222,9 @@
 	color: #fff;
 }
 
-/* === CLICK TO DEMO LABEL === */
+/* Remove neon click label */
 .clickDemoLabel {
-	position: absolute;
-	bottom: 1.5rem;
-	left: 50%;
-	transform: translateX(-50%);
-	font-size: 1.1rem;
-	font-weight: 700;
-	color: #0ff; /* bright cyan */
-	font-family: "Fira Code", "Source Code Pro", monospace;
-	user-select: none;
-	pointer-events: none;
-	white-space: nowrap;
+	display: none;
 }
 
 /* Responsive */

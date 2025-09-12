@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
 	motion,
 	AnimatePresence,
@@ -67,7 +67,9 @@ const projects = [
 
 export default function Projects() {
 	const [selected, setSelected] = useState(null);
+	const [quote, setQuote] = useState("");
 	const sectionRef = useRef(null);
+
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
 		offset: ["start end", "end start"],
@@ -76,8 +78,12 @@ export default function Projects() {
 	const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
 	const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
-	const quote =
-		philosophyQuotes[Math.floor(Math.random() * philosophyQuotes.length)];
+	// Pick random quote only after client mounts
+	useEffect(() => {
+		setQuote(
+			philosophyQuotes[Math.floor(Math.random() * philosophyQuotes.length)]
+		);
+	}, []);
 
 	return (
 		<section ref={sectionRef} className={styles.projectsSection}>
@@ -92,15 +98,17 @@ export default function Projects() {
 			/>
 
 			{/* Quote & Title */}
-			<motion.p
-				className={styles.philosophyQuote}
-				initial={{ opacity: 0, y: 30 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.7 }}
-				viewport={{ once: true }}
-			>
-				{quote}
-			</motion.p>
+			{quote && (
+				<motion.p
+					className={styles.philosophyQuote}
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.7 }}
+					viewport={{ once: true }}
+				>
+					{quote}
+				</motion.p>
+			)}
 
 			<motion.h2
 				className={styles.sectionTitle}
@@ -140,7 +148,6 @@ export default function Projects() {
 							<p className={styles.cardDesc}>{project.description}</p>
 							<p className={styles.cardAbout}>{project.about}</p>
 						</div>
-
 						<div className={styles.clickDemoLabel}>Click to see demo</div>
 					</motion.div>
 				))}

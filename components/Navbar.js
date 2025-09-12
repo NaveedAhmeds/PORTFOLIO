@@ -1,3 +1,4 @@
+// components/Navbar.js
 import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,18 +8,20 @@ export default function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [scrollProgress, setScrollProgress] = useState(0);
 
+	// Links with correct component IDs
 	const navLinks = [
-		{ href: "#experiencetimeline", label: "Experience" },
+		{ href: "#experience", label: "Experience" },
 		{ href: "#projects", label: "Projects" },
 		{ href: "#contact", label: "Contact" },
 	];
 
+	// Scroll to top on logo click
 	const scrollToTop = (e) => {
 		e.preventDefault();
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
-	//Navbar - Porgress Listener
+	// Scroll listener for progress bar and navbar effects
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
@@ -27,7 +30,6 @@ export default function Navbar() {
 			const progress = Math.min(scrollTop / docHeight, 1);
 
 			setScrollProgress(progress);
-			// Keep any other scroll-dependent stuff you want, like nav bg or classes
 			setScrolled(scrollTop > 10);
 		};
 
@@ -44,7 +46,7 @@ export default function Navbar() {
 				transition={{ type: "spring", stiffness: 80, damping: 15 }}
 			>
 				<div className={styles.navContent}>
-					{/* Wrap logo and subtitle in container */}
+					{/* Logo */}
 					<div className={styles.logoWrapper}>
 						<a href="#" className={styles.logo} onClick={scrollToTop}>
 							Naveed
@@ -52,6 +54,7 @@ export default function Navbar() {
 						<div className={styles.subtitle}>UI/UX Designer/Developer</div>
 					</div>
 
+					{/* Desktop Links */}
 					<ul className={styles.navLinks}>
 						{navLinks.map(({ href, label }) => (
 							<li key={href}>
@@ -60,6 +63,7 @@ export default function Navbar() {
 						))}
 					</ul>
 
+					{/* Mobile Hamburger */}
 					<div
 						className={styles.hamburger}
 						onClick={() => setMenuOpen((prev) => !prev)}
@@ -71,14 +75,15 @@ export default function Navbar() {
 						<span />
 					</div>
 
+					{/* Mobile Menu */}
 					<AnimatePresence>
 						{menuOpen && (
 							<motion.ul
 								className={styles.mobileMenu}
-								initial={{ opacity: 0, y: -10 }}
+								initial={{ opacity: 0, y: -20 }}
 								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -10 }}
-								transition={{ duration: 0.2 }}
+								exit={{ opacity: 0, y: -20 }}
+								transition={{ duration: 0.25 }}
 							>
 								{navLinks.map(({ href, label }) => (
 									<li key={href} onClick={() => setMenuOpen(false)}>
@@ -90,6 +95,7 @@ export default function Navbar() {
 					</AnimatePresence>
 				</div>
 
+				{/* Scroll Progress Bar */}
 				<div className={styles.progressContainer}>
 					<div
 						className={styles.progressBar}
