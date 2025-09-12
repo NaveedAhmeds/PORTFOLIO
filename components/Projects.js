@@ -78,7 +78,6 @@ export default function Projects() {
 	const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
 	const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
-	// Pick random quote only after client mounts
 	useEffect(() => {
 		setQuote(
 			philosophyQuotes[Math.floor(Math.random() * philosophyQuotes.length)]
@@ -87,17 +86,6 @@ export default function Projects() {
 
 	return (
 		<section ref={sectionRef} className={styles.projectsSection}>
-			{/* Background */}
-			<motion.div
-				className={styles.animatedBg}
-				style={{
-					opacity: bgOpacity,
-					y: bgY,
-				}}
-				aria-hidden
-			/>
-
-			{/* Quote & Title */}
 			{quote && (
 				<motion.p
 					className={styles.philosophyQuote}
@@ -120,7 +108,6 @@ export default function Projects() {
 				Projects
 			</motion.h2>
 
-			{/* Projects Grid */}
 			<div className={styles.projectsGrid}>
 				{projects.map((project, idx) => (
 					<motion.div
@@ -130,11 +117,7 @@ export default function Projects() {
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.3, delay: idx * 0.1 }}
 						viewport={{ once: true }}
-						whileHover={{
-							y: -4,
-							scale: 1.03,
-							boxShadow: "0 6px 30px rgba(255, 255, 255, 0.05)",
-						}}
+						whileHover={{ y: -4, scale: 1.03 }}
 						onClick={() => setSelected(project)}
 					>
 						<img
@@ -148,12 +131,10 @@ export default function Projects() {
 							<p className={styles.cardDesc}>{project.description}</p>
 							<p className={styles.cardAbout}>{project.about}</p>
 						</div>
-						<div className={styles.clickDemoLabel}>Click to see demo</div>
 					</motion.div>
 				))}
 			</div>
 
-			{/* Modal */}
 			<AnimatePresence>
 				{selected && (
 					<motion.div
@@ -165,10 +146,10 @@ export default function Projects() {
 					>
 						<motion.div
 							className={styles.modalContent}
-							initial={{ scale: 0.9, opacity: 0, y: 80 }}
-							animate={{ scale: 1, opacity: 1, y: 0 }}
-							exit={{ scale: 0.9, opacity: 0, y: 120 }}
-							transition={{ type: "spring", stiffness: 200, damping: 25 }}
+							initial={{ scale: 0.8, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.8, opacity: 0 }}
+							transition={{ type: "spring", stiffness: 200, damping: 20 }}
 							onClick={(e) => e.stopPropagation()}
 						>
 							<button
