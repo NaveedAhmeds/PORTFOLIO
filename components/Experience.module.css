@@ -1,208 +1,74 @@
-/* === TIMELINE CONTAINER === */
-.timeline {
-	cursor: none !important;
+.experienceSection {
 	position: relative;
-	padding: 2rem 1rem;
-	max-width: 1200px;
-	margin: 0 auto;
-	background: rgba(255, 255, 255, 0.03); /* glass background */
-	backdrop-filter: blur(12px); /* frosted effect */
-	border-radius: 1.2rem;
-	font-family: "Neue Montreal", "Inter", "Source Sans Pro", -apple-system,
-		BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-		"Open Sans", "Helvetica Neue", sans-serif;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+	min-height: 100vh;
+	padding: 4rem 1rem;
+	color: white;
+	font-family: "Neue Montreal", "Inter", sans-serif;
+	overflow: hidden;
 }
 
-/* === VERTICAL TIMELINE LINE === */
-.timelineLine {
-	cursor: none !important;
-	content: "";
+.experienceOverlay {
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 50%;
-	width: 4px;
-	border-radius: 2px;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	transition: opacity 0.6s ease;
 	z-index: 0;
-	box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
 }
 
-/* === TIMELINE ITEM BASE STYLES === */
-.timeline article {
-	cursor: none !important;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+.experienceContent {
 	position: relative;
-	margin: 2rem 0;
-	max-width: 600px;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	font-family: inherit;
-}
-
-/* === ALTERNATE LEFT AND RIGHT ALIGNMENTS === */
-.timeline article:nth-child(even) {
-	align-items: flex-end;
-}
-
-/* === TIMELINE DOT === */
-.timelineDot {
-	cursor: none !important;
-	position: absolute;
-	top: 1.5rem;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 1.2rem;
-	height: 1.2rem;
-	background: #3b82f6;
-	border-radius: 50%;
-	box-shadow: 0 0 10px #6366f1;
+	max-width: 900px;
+	margin: 0 auto;
 	z-index: 10;
+	text-align: center;
 }
 
-/* === TIMELINE CARD CONTENT STYLES === */
-.timelineContent {
-	cursor: none !important;
-	position: relative;
-	background: rgba(255, 255, 255, 0.05); /* glassy frosted card */
-	backdrop-filter: blur(15px);
-	border-radius: 1rem;
-	padding: 1.5rem 2rem;
-	color: #f0f0f0;
-	max-width: 45%;
-	margin-bottom: 1rem;
-	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
-	transition: all 0.3s ease;
-	user-select: none;
-	font-family: inherit;
-}
-
-/* Headings and body text inside cards */
-.timelineContent h4,
-.timelineContent p,
-.timelineContent ul {
-	font-family: "Neue Montreal", "Inter", "Source Sans Pro", sans-serif;
-	color: #f5f5f5; /* brighter text for readability */
-}
-
-/* Text alignment for left/right alternate cards */
-.timeline article:nth-child(even) .timelineContent {
-	text-align: right;
-}
-
-.timeline article:nth-child(odd) .timelineContent {
-	text-align: left;
-}
-
-/* === QUOTES (philosopher quotes) font  === */
-.timeline article > div:last-child {
+.experienceHeader h2 {
 	font-family: "Cinzel", serif;
-	font-style: italic;
-	color: #fff;
+	font-size: 3rem;
+	font-weight: 700;
+	margin-bottom: 0.5rem;
 }
 
-.timeline article > div:last-child p {
-	font-family: "Cinzel", serif;
-	font-style: italic;
-	color: #fff;
+.experienceHeader p {
+	font-size: 1.15rem;
+	color: rgba(255, 255, 255, 0.75);
+	max-width: 600px;
+	margin: 0 auto;
+	margin-bottom: 2rem;
 }
 
-/* === HOVER EFFECTS === */
-.timeline article:hover .timelineContent {
-	transform: translateY(-5px) scale(1.02);
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.25),
-		0 0 35px rgba(99, 102, 241, 0.3);
-	border-color: rgba(255, 255, 255, 0.4);
-	animation: pulseGlow 2s infinite ease-in-out;
+/* Testimonial wrapper styling */
+.testimonialWrapper {
+	margin-bottom: 5rem;
 }
 
-/* === ANIMATION KEYFRAMES FOR GLOW === */
-@keyframes pulseGlow {
-	0%,
-	100% {
-		box-shadow: 0 0 15px rgba(255, 255, 255, 0.2),
-			0 0 30px rgba(99, 102, 241, 0.2);
-	}
-	50% {
-		box-shadow: 0 0 25px rgba(255, 255, 255, 0.35),
-			0 0 40px rgba(99, 102, 241, 0.35);
-	}
+/* Timeline wrapper styling */
+.timelineWrapper {
+	margin-top: 2rem;
 }
 
-/* === RESPONSIVE STYLES FOR TABLETS AND SMALLER SCREENS === */
+/* Make content responsive */
 @media (max-width: 768px) {
-	.timelineLine {
-		left: 12px !important;
-		transform: none !important;
-		width: 3px !important;
+	.experienceHeader h2 {
+		font-size: 2.5rem;
 	}
-
-	.timeline article,
-	.timeline article:nth-child(even),
-	.timeline article:nth-child(odd) {
-		align-items: center !important;
-		max-width: 90% !important;
-		flex-direction: column !important;
-		margin-left: auto !important;
-		margin-right: auto !important;
+	.experienceHeader p {
+		font-size: 1rem;
 	}
-
-	.timelineContent {
-		max-width: 100% !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-		text-align: center !important;
-		padding: 2rem !important;
-		flex: none !important;
-	}
-
-	.timelineDot {
-		position: relative !important;
-		top: 0 !important;
-		left: auto !important;
-		transform: none !important;
-		margin-bottom: 1rem;
-	}
-
-	.timeline > article > div:last-child {
-		max-width: 100% !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-		margin-top: 1rem !important;
-		padding: 1rem !important;
-		font-size: 1rem !important;
-		text-align: center !important;
+	.timelineWrapper,
+	.testimonialWrapper {
+		margin: 2rem 0;
 	}
 }
 
-/* === RESPONSIVE STYLES FOR SMALL PHONES AND VERY SMALL SCREENS === */
-@media (max-width: 400px) {
-	.timelineContent {
-		padding: 1rem 1.2rem !important;
-		font-size: 0.9rem !important;
-	}
-
-	.timelineDot {
-		width: 1rem !important;
-		height: 1rem !important;
-	}
-}
-
-/* Adjusted diagonal mask and filter for tablets and smaller */
-@media (max-width: 768px) {
-	.bgDiagonal {
-		clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-		filter: brightness(0.75) blur(1px) saturate(1.1);
-		transition: all 0.3s ease;
-	}
-}
-
-/* Further softened diagonal and lighter blur for very small phones */
 @media (max-width: 480px) {
-	.bgDiagonal {
-		clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
-		filter: brightness(0.85) blur(0.8px) saturate(1.05);
-		transition: all 0.3s ease;
+	.experienceHeader h2 {
+		font-size: 2rem;
+	}
+	.experienceHeader p {
+		font-size: 0.95rem;
 	}
 }

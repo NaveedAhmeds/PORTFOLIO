@@ -1,10 +1,11 @@
+/* ===== Contact Section ===== */
 .contactSection {
 	position: relative;
-	margin-top: 0rem;
 	padding: 10rem 1.5rem;
 	text-align: center;
-	color: #f5f5f5;
-	font-family: "Inter", sans-serif;
+	color: #fff;
+	font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 	overflow: hidden;
 }
 
@@ -12,33 +13,32 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: rgba(255, 255, 255, 0.05);
-	backdrop-filter: blur(3px);
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(8px);
 	z-index: -1;
-	border-radius: 0;
+	border-radius: 1.5rem;
 }
 
+/* Heading */
 .heading {
-	font-size: 2rem;
-	margin-bottom: 2rem;
-	letter-spacing: 1px;
+	font-size: 2.5rem;
+	margin-bottom: 3rem;
 	color: #fff;
-	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+	text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
+/* Glass container */
 .bgGlass {
 	position: relative;
-	overflow: hidden;
-	/* existing styles */
-	background: rgba(255, 255, 255, 0.12);
-	backdrop-filter: blur(14px);
-	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(12px);
 	border-radius: 1.5rem;
 	padding: 3rem 2rem;
-	max-width: 520px;
+	max-width: 540px;
 	margin: 0 auto;
+	box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.15);
 	transition: all 0.4s cubic-bezier(0.4, 2, 0.6, 1);
-	border: 1px solid rgba(255, 255, 255, 0.2);
 	z-index: 0;
 }
 
@@ -56,7 +56,7 @@
 	background-size: 400% 400%;
 	border-radius: inherit;
 	animation: gradientShift 15s ease infinite;
-	z-index: -1; /* behind content */
+	z-index: -1;
 }
 
 @keyframes gradientShift {
@@ -71,10 +71,11 @@
 	}
 }
 
+/* Icon */
 .icon {
-	font-size: 2.1rem;
-	margin-bottom: 1.2rem;
-	color: #d7dfe0; /* neon-ish glow */
+	font-size: 2.2rem;
+	margin-bottom: 1.5rem;
+	color: #d7dfe0;
 	text-shadow: 0 0 12px #00e0ff, 0 0 24px #00e0ff80;
 	animation: bounce 1.2s infinite alternate;
 }
@@ -88,21 +89,7 @@
 	}
 }
 
-.contactFormContainer {
-	animation: fadeIn 1.2s cubic-bezier(0.4, 2, 0.6, 1);
-}
-
-@keyframes fadeIn {
-	from {
-		transform: translateY(30px);
-		opacity: 0;
-	}
-	to {
-		transform: translateY(0);
-		opacity: 1;
-	}
-}
-
+/* Form */
 .contactForm {
 	display: flex;
 	flex-direction: column;
@@ -110,17 +97,19 @@
 	width: 100%;
 }
 
+/* Input group */
 .inputGroup {
 	position: relative;
 }
 
+/* Inputs & textarea */
 .input,
 .textarea {
 	width: 100%;
-	padding: 1rem;
-	border: 1px solid rgba(255, 255, 255, 0.25);
-	border-radius: 10px;
-	background: rgba(0, 0, 0, 0.25); /* dark overlay for readability */
+	padding: 1.1rem;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 12px;
+	background: rgba(0, 0, 0, 0.25);
 	color: #fff;
 	font-size: 1.1rem;
 	font-family: inherit;
@@ -136,12 +125,13 @@
 	transform: scale(1.01);
 }
 
+/* Floating labels */
 .floatingLabel {
 	position: absolute;
 	left: 1rem;
 	top: 50%;
 	transform: translateY(-50%);
-	color: #ddd;
+	color: #ccc;
 	pointer-events: none;
 	transition: all 0.2s ease-out;
 	background: transparent;
@@ -160,11 +150,13 @@
 	text-shadow: 0 0 10px #00e0ff55;
 }
 
+/* Textarea */
 .textarea {
-	min-height: 120px;
+	min-height: 130px;
 	resize: vertical;
 }
 
+/* Button */
 .button {
 	background: linear-gradient(90deg, #000000 0%, #090909 100%);
 	color: #fff;
@@ -190,6 +182,7 @@
 	box-shadow: 0 4px 12px rgba(225, 229, 229, 0.15);
 }
 
+/* Success message */
 .successMessage {
 	margin-top: 1.2rem;
 	padding: 0.85rem 1rem;
@@ -201,7 +194,19 @@
 	animation: fadeIn 0.8s;
 }
 
-/* Dark Mode */
+/* Animations */
+@keyframes fadeIn {
+	from {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+/* Dark Mode Adjustments */
 @media (prefers-color-scheme: dark) {
 	.bgGlass {
 		background: rgba(10, 10, 20, 0.25);
@@ -217,19 +222,16 @@
 	.floatingLabel {
 		color: #ccc;
 	}
-	.button {
-		box-shadow: 0 6px 18px rgba(0, 224, 255, 0.35);
-	}
 }
 
-/* Responsiveness */
+/* Responsive */
 @media (max-width: 768px) {
 	.bgGlass {
 		width: 90%;
 		padding: 2rem 1rem;
 	}
 	.heading {
-		font-size: 1.75rem;
+		font-size: 2rem;
 	}
 	.input,
 	.textarea {
@@ -244,7 +246,7 @@
 
 @media (max-width: 480px) {
 	.heading {
-		font-size: 1.5rem;
+		font-size: 1.6rem;
 	}
 	.icon {
 		font-size: 1.8rem;
@@ -253,8 +255,10 @@
 	.input,
 	.textarea {
 		padding: 0.8rem;
+		font-size: 0.95rem;
 	}
 	.button {
 		padding: 0.8rem;
+		font-size: 0.95rem;
 	}
 }
