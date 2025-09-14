@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Code, Palette, Globe } from "lucide-react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -86,6 +86,189 @@ const quoteVariants = {
 	},
 };
 
+// Child component handles hooks properly
+function TimelineItem({ exp, isLeft, quote }) {
+	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+	const typedQuote = useTyping(quote);
+
+	return (
+		<motion.article
+			ref={ref}
+			initial={{ opacity: 0, y: 40, rotateY: 0 }}
+			animate={
+				inView
+					? {
+							opacity: 1,
+							y: 0,
+							rotateY: isLeft ? 5 : -5,
+							transition: { type: "spring", bounce: 0.25, duration: 0.5 },
+					  }
+					: { opacity: 0, y: 40, rotateY: 0 }
+			}
+			whileHover={{
+				rotateX: -8,
+				rotateY: isLeft ? 8 : -8,
+				scale: 1.07,
+				transition: { type: "spring", stiffness: 270, damping: 20 },
+			}}
+			whileTap={{ scale: 0.97 }}
+			style={{
+				display: "flex",
+				flexDirection: isLeft ? "row" : "row-reverse",
+				alignItems: "flex-start",
+				justifyContent: "space-between",
+				marginBottom: "4rem",
+				position: "relative",
+				zIndex: 1,
+				flexWrap: "wrap",
+			}}
+		>
+			{/* Timeline Dot */}
+			<div
+				aria-hidden="true"
+				className="timelineDot"
+				style={{
+					position: "absolute",
+					top: "1.5rem",
+					left: "50%",
+					transform: "translateX(-50%)",
+					width: 16,
+					height: 16,
+					backgroundColor: exp.color,
+					borderRadius: "50%",
+					border: "3px solid #0d0d0d",
+					boxShadow: `0 0 8px ${exp.color}88`,
+					zIndex: 2,
+				}}
+			/>
+
+			{/* Content */}
+			<section
+				role="region"
+				tabIndex={0}
+				className="timelineContent"
+				style={{
+					background: "rgba(13, 13, 13, 0.85)",
+					borderColor: exp.color + "55",
+					padding: "1.5rem 2rem",
+					maxWidth: "45%",
+					flex: "1 1 100%",
+					marginBottom: "1rem",
+					cursor: "default",
+					userSelect: "none",
+				}}
+			>
+				<header
+					style={{
+						display: "flex",
+						alignItems: "center",
+						gap: "1rem",
+						marginBottom: "0.75rem",
+						flexWrap: "wrap",
+					}}
+				>
+					<div
+						style={{
+							backgroundColor: exp.color + "33",
+							padding: "0.5rem",
+							borderRadius: "0.5rem",
+							width: 40,
+							height: 40,
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<exp.icon size={22} color={exp.color} />
+					</div>
+					<div>
+						<h4
+							style={{
+								margin: 0,
+								fontWeight: 700,
+								color: "#fff",
+								fontFamily: "'Cinzel', serif",
+								fontSize: "1.3rem",
+							}}
+						>
+							{exp.title}
+						</h4>
+						<p
+							style={{
+								margin: 0,
+								fontWeight: 600,
+								color: exp.color,
+								fontFamily: "'Neue Montreal', sans-serif",
+								fontSize: "0.9rem",
+							}}
+						>
+							{exp.company} &bull; {exp.type}
+						</p>
+					</div>
+				</header>
+				<p
+					style={{
+						color: "rgba(255,255,255,0.85)",
+						fontFamily: "'Neue Montreal', sans-serif",
+						fontSize: "1rem",
+						marginBottom: "0.5rem",
+					}}
+				>
+					{exp.description}
+				</p>
+				<ul
+					style={{
+						margin: 0,
+						paddingLeft: "1rem",
+						color: "rgba(255,255,255,0.7)",
+						fontSize: "0.9rem",
+						fontFamily: "'Neue Montreal', sans-serif",
+						listStyleType: "disc",
+						lineHeight: 1.4,
+					}}
+				>
+					{exp.details.map((d, idx) => (
+						<li key={idx}>{d}</li>
+					))}
+				</ul>
+			</section>
+
+			{/* Quote */}
+			<motion.div
+				initial="hidden"
+				animate={inView ? "visible" : "hidden"}
+				variants={quoteVariants}
+				style={{
+					maxWidth: "45%",
+					marginLeft: isLeft ? "2rem" : "0",
+					marginRight: isLeft ? "0" : "2rem",
+					color: "#fff",
+					fontStyle: "italic",
+					fontFamily: "'Cinzel', serif",
+					fontSize: "1.1rem",
+					alignSelf: "center",
+					userSelect: "none",
+					pointerEvents: "none",
+					padding: "1rem",
+					borderRadius: "1rem",
+					background: "rgba(255,255,255,0.05)",
+					boxShadow: isLeft
+						? "4px 4px 12px rgba(0,0,0,0.25)"
+						: "-4px 4px 12px rgba(0,0,0,0.25)",
+					backdropFilter: "blur(6px)",
+					WebkitBackdropFilter: "blur(6px)",
+					flex: "1 1 100%",
+					marginTop: "1rem",
+					whiteSpace: "pre-wrap",
+				}}
+				aria-hidden="true"
+			>
+				{typedQuote}
+			</motion.div>
+		</motion.article>
+	);
+}
+
 export default function ExperienceTimeline() {
 	const { scrollY } = useViewportScroll();
 	const themeColor = useTransform(
@@ -115,189 +298,14 @@ export default function ExperienceTimeline() {
 					boxShadow: "0 0 12px rgba(99, 102, 241, 0.5)",
 				}}
 			/>
-
-			{experiences.map((exp, i) => {
-				const isLeft = i % 2 === 0;
-				const Icon = exp.icon;
-				const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
-				const quote = philosopherQuotes[i % philosopherQuotes.length];
-				const typedQuote = useTyping(quote);
-
-				return (
-					<motion.article
-						ref={ref}
-						key={i}
-						initial={{ opacity: 0, y: 40, rotateY: 0 }}
-						animate={
-							inView
-								? {
-										opacity: 1,
-										y: 0,
-										rotateY: isLeft ? 5 : -5,
-										transition: { type: "spring", bounce: 0.25, duration: 0.5 },
-								  }
-								: { opacity: 0, y: 40, rotateY: 0 }
-						}
-						whileHover={{
-							rotateX: -8,
-							rotateY: isLeft ? 8 : -8,
-							scale: 1.07,
-							transition: { type: "spring", stiffness: 270, damping: 20 },
-						}}
-						whileTap={{ scale: 0.97 }}
-						style={{
-							display: "flex",
-							flexDirection: isLeft ? "row" : "row-reverse",
-							alignItems: "flex-start",
-							justifyContent: "space-between",
-							marginBottom: "4rem",
-							position: "relative",
-							zIndex: 1,
-							flexWrap: "wrap",
-						}}
-					>
-						<div
-							aria-hidden="true"
-							className="timelineDot"
-							style={{
-								position: "absolute",
-								top: "1.5rem",
-								left: "50%",
-								transform: "translateX(-50%)",
-								width: 16,
-								height: 16,
-								backgroundColor: exp.color,
-								borderRadius: "50%",
-								border: "3px solid #0d0d0d",
-								boxShadow: `0 0 8px ${exp.color}88`,
-								zIndex: 2,
-							}}
-						/>
-
-						<section
-							role="region"
-							tabIndex={0}
-							className="timelineContent"
-							style={{
-								background: "rgba(13, 13, 13, 0.85)",
-								borderColor: exp.color + "55",
-								padding: "1.5rem 2rem",
-								maxWidth: "45%",
-								flex: "1 1 100%",
-								marginBottom: "1rem",
-								cursor: "default",
-								userSelect: "none",
-							}}
-						>
-							<header
-								style={{
-									display: "flex",
-									alignItems: "center",
-									gap: "1rem",
-									marginBottom: "0.75rem",
-									flexWrap: "wrap",
-								}}
-							>
-								<div
-									style={{
-										backgroundColor: exp.color + "33",
-										padding: "0.5rem",
-										borderRadius: "0.5rem",
-										width: 40,
-										height: 40,
-										display: "flex",
-										justifyContent: "center",
-										alignItems: "center",
-									}}
-								>
-									<Icon size={22} color={exp.color} />
-								</div>
-								<div>
-									<h4
-										style={{
-											margin: 0,
-											fontWeight: 700,
-											color: "#fff",
-											fontFamily: "'Cinzel', serif",
-											fontSize: "1.3rem",
-										}}
-									>
-										{exp.title}
-									</h4>
-									<p
-										style={{
-											margin: 0,
-											fontWeight: 600,
-											color: exp.color,
-											fontFamily: "'Neue Montreal', sans-serif",
-											fontSize: "0.9rem",
-										}}
-									>
-										{exp.company} &bull; {exp.type}
-									</p>
-								</div>
-							</header>
-							<p
-								style={{
-									color: "rgba(255,255,255,0.85)",
-									fontFamily: "'Neue Montreal', sans-serif",
-									fontSize: "1rem",
-									marginBottom: "0.5rem",
-								}}
-							>
-								{exp.description}
-							</p>
-							<ul
-								style={{
-									margin: 0,
-									paddingLeft: "1rem",
-									color: "rgba(255,255,255,0.7)",
-									fontSize: "0.9rem",
-									fontFamily: "'Neue Montreal', sans-serif",
-									listStyleType: "disc",
-									lineHeight: 1.4,
-								}}
-							>
-								{exp.details.map((d, idx) => (
-									<li key={idx}>{d}</li>
-								))}
-							</ul>
-						</section>
-
-						<motion.div
-							initial="hidden"
-							animate={inView ? "visible" : "hidden"}
-							variants={quoteVariants}
-							style={{
-								maxWidth: "45%",
-								marginLeft: isLeft ? "2rem" : "0",
-								marginRight: isLeft ? "0" : "2rem",
-								color: "#fff",
-								fontStyle: "italic",
-								fontFamily: "'Cinzel', serif",
-								fontSize: "1.1rem",
-								alignSelf: "center",
-								userSelect: "none",
-								pointerEvents: "none",
-								padding: "1rem",
-								borderRadius: "1rem",
-								background: "rgba(255,255,255,0.05)",
-								boxShadow: isLeft
-									? "4px 4px 12px rgba(0,0,0,0.25)"
-									: "-4px 4px 12px rgba(0,0,0,0.25)",
-								backdropFilter: "blur(6px)",
-								WebkitBackdropFilter: "blur(6px)",
-								flex: "1 1 100%",
-								marginTop: "1rem",
-								whiteSpace: "pre-wrap",
-							}}
-							aria-hidden="true"
-						>
-							{typedQuote}
-						</motion.div>
-					</motion.article>
-				);
-			})}
+			{experiences.map((exp, i) => (
+				<TimelineItem
+					key={i}
+					exp={exp}
+					isLeft={i % 2 === 0}
+					quote={philosopherQuotes[i % philosopherQuotes.length]}
+				/>
+			))}
 		</motion.div>
 	);
 }
